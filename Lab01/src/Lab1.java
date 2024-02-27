@@ -4,8 +4,12 @@ import static java.lang.Integer.parseInt;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
+public class Lab1 {
     public static void main(String[] args) {
+        Lab1 lab1 = new Lab1();
+        lab1.compulsory();
+    }
+    void compulsory(){
         String[] languages = {"C", "C++",
                 "C#", "Python", "Go", "Rust",
                 "JavaScript", "PHP", "Swift", "Java"};
@@ -28,9 +32,17 @@ public class Main {
         }
         while (result > 9);
 
-        System.out.print("Hello world!\n");
         System.out.printf("Willy-nilly, this semester I will learn " + languages[result]);
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
     }
+
+    void homework(){
+        //
+    }
+
+    void bonus() {
+        //
+    }
 }
+
