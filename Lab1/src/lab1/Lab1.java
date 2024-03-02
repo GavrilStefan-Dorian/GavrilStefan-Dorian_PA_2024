@@ -1,3 +1,5 @@
+package lab1;
+
 import java.util.Scanner;
 
 public class Lab1 {
@@ -134,4 +136,3 @@ public class Lab1 {
     }
 
 }
-
