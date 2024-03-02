@@ -1,18 +1,11 @@
-import java.util.Arrays;
-import java.util.Vector;
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.Scanner;
+
 public class Lab1 {
-    private int n;
-    private int count = 0;
-
-    private boolean[][] adjacencyMatrix;
-
     public static void main(String[] args) {
         Lab1 lab1 = new Lab1();
         lab1.compulsory();
         lab1.homework(args);
-        //lab1.bonus(args);
+        lab1.bonus();
     }
 
     void compulsory() {
@@ -64,8 +57,8 @@ public class Lab1 {
         StringBuilder identified_numbs = getIdentified_numbs(a, b, k);
 
         long endTime = System.nanoTime();
-        System.out.println(identified_numbs);
-        System.out.println("Application runtime: " + (endTime - startTime));
+        System.out.printf("%1$d-reducible numbers in [%2$d, %3$d]: " + identified_numbs, k, a, b);
+        System.out.println("\nApplication runtime: " + (endTime - startTime));
 
     }
 
@@ -108,19 +101,15 @@ public class Lab1 {
         return identified_numbs;
     }
 
-    void bonus(String[] args) {
-        //Create the adjacency matrix of a wheel graph Wn.
-        //Display on the screen a textual representation of the matrix. 36 - 18 = 18 + 3= 21
-        //Write an algorithm that finds all the cycles of a wheel graph. Verify that their number is n^2 - 3n + 3.
+    void bonus() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the vertex count: ");
 
-        if (args.length < 1) {
-            System.out.println(
-                    "Usage: n == vertex count");
-            System.exit(-1);
-        }
-        n = Integer.parseInt(args[0]);
+        int n = scanner.nextInt();
 
-        adjacencyMatrix = new boolean[n][n];
+        scanner.close();
+
+        boolean[][] adjacencyMatrix = new boolean[n][n];
 
         for (int i = 0; i < n - 1; i++) {
             adjacencyMatrix[i][n - 1] = true;
@@ -139,38 +128,10 @@ public class Lab1 {
             System.out.println();
         }
 
+        int count = 1 + (n-1) * (n-2);
         System.out.println();
-        int[] coloring = new int[n];
-        int[] parents = new int[n];
-        cyclesCount();
         System.out.print("Count of all cycles: " + count);
     }
 
-    private void cyclesCount() {
-        boolean[] visited = new boolean[n];
-
-        for (int v = 0; v < n; v++) {
-            Arrays.fill(visited, false);
-            Vector<Integer> path = new Vector<>();
-            DFS(v, v, visited, path);
-        }
-    }
-
-    private void DFS(int root, int current, boolean[] visited, Vector<Integer> path) {
-        visited[current] = true;
-        path.add(current);
-
-        for (int v = 0; v < n; v++) {
-            if (adjacencyMatrix[current][v]) {
-                if (!visited[v]) {
-                    DFS(root, v, visited, path);
-                } else if (v == root && path.size() > 2) {
-                    count++;
-                }
-            }
-        }
-        path.remove(path.size() - 1);
-        visited[current] = false;
-    }
 }
 
