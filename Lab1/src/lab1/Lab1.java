@@ -34,6 +34,7 @@ public class Lab1 {
         }
         while (result > 9);
 
+        System.out.println("Hello world!");
         System.out.println("Willy-nilly, this semester I will learn " + languages[result]);
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
