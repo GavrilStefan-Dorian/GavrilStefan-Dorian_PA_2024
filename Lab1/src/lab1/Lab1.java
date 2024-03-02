@@ -3,6 +3,7 @@ package lab1;
 import java.util.Scanner;
 
 public class Lab1 {
+    //author: Gavril Stefan-Dorian
     public static void main(String[] args) {
         Lab1 lab1 = new Lab1();
         lab1.compulsory();
