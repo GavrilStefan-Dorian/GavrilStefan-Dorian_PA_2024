@@ -78,7 +78,7 @@ public class Lab1 {
         for (; iterator <= b; iterator++) {
             result = iterator;
             do {
-                if(result < 10) {
+                if (result < 10) {
                     if (digitMet[result] == 1) {
                         break;
                     }
@@ -91,7 +91,7 @@ public class Lab1 {
                 result = i;
                 i = 0;
 
-                if(result < 10) {
+                if (result < 10) {
                     digitMet[result] = 1;
                 }
             }
@@ -132,8 +132,24 @@ public class Lab1 {
             System.out.println();
         }
 
-        int count = 1 + (n-1) * (n-2);
+        int count = 0;
         System.out.println();
+        System.out.println("All cycles:");
+
+        count++;
+        for (int i = 0; i < n - 1; i++)
+            System.out.print(i + " ");
+        System.out.println(0);
+
+        for (int i = 0; i < n - 2; i++) {
+            for (int j = 0; j < n - 1; j++) {
+                count++;
+                for (int k = 0; k < 2 + i; k++)
+                    System.out.print((k + j) % (n - 1) + " ");
+                System.out.println(n - 1 + " " + j);
+            }
+        }
+
         System.out.print("Count of all cycles: " + count);
     }
 
