@@ -15,7 +15,15 @@ public class Main {
 
         Client c3 = new Client("Client 3",
                 LocalTime.NOON, LocalTime.MIDNIGHT);
+        Depot d1 = new Depot("Depot 1");
         System.out.println(c3);
+        System.out.println(d1);
+
+        Vehicle v1 = new Vehicle("Vehicle 1");
+        System.out.println(v1);
+
+        v1.setDepot(d1);
+        System.out.println(v1);
 
         Client c4 = new Client("Client 4", ClientType.PREMIUM);
         System.out.println(c4.getName() + " type=" +  c4.getType());
