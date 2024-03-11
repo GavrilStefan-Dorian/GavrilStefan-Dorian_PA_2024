@@ -1,6 +1,6 @@
-public class Vehicle {
-    private String name;
-    private Depot depot;
+public abstract class Vehicle {
+    protected String name;
+    protected Depot depot;
     public Vehicle(String name) {
         this.name = name;
     }
@@ -19,6 +19,7 @@ public class Vehicle {
 
     public void setDepot(Depot depot) {
         this.depot = depot;
+        depot.addVehicle(this);
     }
 
 
@@ -26,7 +27,7 @@ public class Vehicle {
     public String toString() {
         return "Vehicle{" +
                 "name='" + name + '\'' +
-                ", depot=" + depot +
+                ", depot=" + (depot != null ? depot.getName() : "") +
                 '}';
     }
 
