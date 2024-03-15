@@ -1,6 +1,9 @@
 import java.time.LocalTime;
 import java.util.Objects;
 
+/**
+ * Client class
+ */
 public class Client {
     private ClientType type;
 

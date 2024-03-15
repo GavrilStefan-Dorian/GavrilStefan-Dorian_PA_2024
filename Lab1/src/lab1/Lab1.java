@@ -2,14 +2,26 @@ package lab1;
 
 import java.util.Scanner;
 
+
+/**
+ * primul comentariu
+ */
 public class Lab1 {
-    //author: Gavril Stefan-Dorian
+
+
+    /**
+     *  main func
+     *
+     * @param args input at terminal
+     */
     public static void main(String[] args) {
         Lab1 lab1 = new Lab1();
         lab1.compulsory();
         lab1.homework(args);
         lab1.bonus();
     }
+
+    //author: Gavril Stefan-Dorian
 
     void compulsory() {
         String[] languages = {"C", "C++",
@@ -40,6 +52,13 @@ public class Lab1 {
         // to see how IntelliJ IDEA suggests fixing it.
     }
 
+
+    /**
+     * homework method
+     *
+     * @param args
+     *
+     */
     void homework(String[] args) {
         long startTime = System.nanoTime();
 
@@ -66,6 +85,13 @@ public class Lab1 {
 
     }
 
+    /**
+     * some other func
+     * @param a
+     * @param b
+     * @param k
+     * @return
+     */
     private static StringBuilder getIdentified_numbs(int a, int b, int k) {
         int i = 0;
         int result;
@@ -105,6 +131,10 @@ public class Lab1 {
         return identified_numbs;
     }
 
+    /**
+     * bonus method
+     **
+     */
     void bonus() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the vertex count: ");

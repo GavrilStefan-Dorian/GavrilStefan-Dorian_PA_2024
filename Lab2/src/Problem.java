@@ -1,7 +1,9 @@
-import java.lang.reflect.Array;
-import java.security.interfaces.RSAPrivateCrtKey;
+import java.time.LocalTime;
 import java.util.Arrays;
 
+/**
+ * Models an instance of VRP problem
+ */
 public class Problem {
     private String name;
     private Depot[] depots;
@@ -9,6 +11,9 @@ public class Problem {
     private Vehicle[] vehicles;
     private int[][] timesDepotsToClients;
     private int[][] timesClientsToClients;
+
+    private int[][] gridDepotsClients;
+    private int[][] gridCostMatrix;
 
     public Problem(String name, Depot[] depots, Client[] clients, Vehicle[] vehicles) {
         this.name = name;
@@ -33,6 +38,51 @@ public class Problem {
         this.setDepots(depots);
         this.setClients(clients);
         this.setVehicles(vehicles);
+    }
+
+    public Problem() {
+
+    }
+
+    public void generateRandomProblem(int numDepots, int numClients, int numVehicles) {
+        name = "Random Problem";
+        depots = new Depot[numDepots];
+        for (int i = 0; i < numDepots; i++) {
+            depots[i] = new Depot("Depot " + (i + 1));
+        }
+
+        clients = new Client[numClients];
+        for (int i = 0; i < numClients; i++) {
+            clients[i] = new Client("Client " + (i + 1),
+                    LocalTime.of(8, 0),
+                    LocalTime.of(12, 0));
+        }
+
+        vehicles = new Vehicle[numVehicles];
+        for (int i = 0; i < numVehicles / 2; i++) {
+            vehicles[i] = new Truck("Truck " + (i + 1));
+        }
+        for (int i = numVehicles / 2; i < numVehicles; i++) {
+            vehicles[i] = new Drone("Drone " + (i + 1));
+        }
+
+        timesDepotsToClients = new int[numDepots][numClients];
+        timesClientsToClients = new int[numClients][numClients];
+
+        for (int i = 0; i < numDepots; i++) {
+            for (int j = 0; j < numClients; j++) {
+                timesDepotsToClients[i][j] = (int) (Math.random() * 200);
+            }
+        }
+        for (int i = 0; i < numClients; i++) {
+            for (int j = 0; j < numClients; j++) {
+                if (i == j) {
+                    timesClientsToClients[i][j] = 0;
+                } else {
+                    timesClientsToClients[i][j] = (int) (Math.random() * 200);
+                }
+            }
+        }
     }
 
     public void addDepot(Depot depot) {
@@ -96,11 +146,21 @@ public class Problem {
     public int[][] getTimesClientsToClients() {
         return timesClientsToClients;
     }
+    public int[][] getGridDepotsClients() {
+        return gridDepotsClients;
+    }
+
+    public int[][] getGridCostMatrix() {
+        return gridCostMatrix;
+    }
 
     public String getName() {
         return name;
     }
 
+    /**
+     * @return vehicles by iterating all depots
+     */
     public Vehicle[] getVehicles() {
         int vehicleCount = 0;
         for (Depot d : depots)

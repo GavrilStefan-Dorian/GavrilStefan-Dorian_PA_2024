@@ -17,6 +17,8 @@ public abstract class Vehicle {
         return depot;
     }
 
+
+
     public void setDepot(Depot depot) {
         this.depot = depot;
         depot.addVehicle(this);

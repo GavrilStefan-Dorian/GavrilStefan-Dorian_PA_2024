@@ -1,8 +1,13 @@
-import javax.swing.*;
 import java.time.LocalTime;
 
-
+/**
+ * Main class
+ */
 public class Main {
+    /**
+     * main method
+     * @param args optional arguments
+     */
     public static void main(String[] args) {
 
         Client c1 = new Client();
@@ -67,7 +72,16 @@ public class Main {
         System.out.println(p1);
 
         Solution s1 = new Solution(p1);
-
+        s1.greedyAlgorithm();
+//          s1.floydWarshallAllocation();
         System.out.println(s1);
+
+        Problem p2 = new Problem();
+        p2.generateRandomProblem(5, 7, 3);
+        System.out.println(p2);
+        Solution s2 = new Solution(p2);
+        s2.greedyAlgorithm();
+
+        System.out.println(s2);
     }
 }
