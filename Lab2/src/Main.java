@@ -67,6 +67,8 @@ public class Main {
         Client[] clients = {c1, c2, c3, c4, c5, c6, c7};
         Vehicle[] vehicles = {dn1, dn2, t1, t2};
 
+        System.out.println("\n\nHomework:");
+
         Problem p1 = new Problem("Problem 1", depots, clients, vehicles);
 
         System.out.println(p1);
@@ -76,12 +78,12 @@ public class Main {
 //          s1.floydWarshallAllocation();
         System.out.println(s1);
 
+
+        System.out.println("\n\nBonus: ");
         Problem p2 = new Problem();
         p2.generateRandomProblem(5, 7, 3);
         System.out.println(p2);
         Solution s2 = new Solution(p2);
         s2.greedyAlgorithm();
-
-        System.out.println(s2);
     }
 }
