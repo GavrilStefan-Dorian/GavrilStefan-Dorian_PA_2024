@@ -1,11 +1,12 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Concert
         extends Attraction
         implements Visitable, Payable {
-    private HashMap<LocalDate, TimeInterval> timetable;
+    private Map<LocalDate, TimeInterval> timetable;
     private double ticketPrice = 20;
 
     public Concert(String name) {
@@ -13,12 +14,12 @@ public class Concert
     }
 
     @Override
-    public HashMap<LocalDate, TimeInterval> getTimeTable() {
+    public Map<LocalDate, TimeInterval> getTimeTable() {
         return timetable;
     }
 
     @Override
-    public void setTimeTable(HashMap<LocalDate, TimeInterval> timeTable) {
+    public void setTimeTable(Map<LocalDate, TimeInterval> timeTable) {
         this.timetable = timeTable;
     }
 

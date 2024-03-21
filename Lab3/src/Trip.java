@@ -1,10 +1,15 @@
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Trip {
     private String city;
     private LocalDate start, end;
+
+    private int daysCount;
     private List<Attraction> attractions = new ArrayList<>();
 
     public Trip(String city, LocalDate start, LocalDate end, List<Attraction> attractions) {
@@ -12,6 +17,16 @@ public class Trip {
         this.start = start;
         this.end = end;
         this.attractions = attractions;
+        daysCount = start.until(end).getDays();
+    }
+
+    public List<Attraction> getVisitableNonPayable(LocalDate date) {
+        return this.attractions.stream().filter(attraction -> {
+            return attraction instanceof Visitable && !(attraction instanceof Payable);
+        }).sorted(Comparator.comparing(attraction -> {
+            LocalTime open = ((Visitable) attraction).getOpeningHour(date);
+            return open != null ? open : LocalTime.MAX;
+        })).collect(Collectors.toList());
     }
 
     public String getCity() {
@@ -24,6 +39,10 @@ public class Trip {
 
     public LocalDate getEnd() {
         return end;
+    }
+
+    public int getDaysCount() {
+        return daysCount;
     }
 
     public List<Attraction> getAttractions() {
@@ -48,11 +67,6 @@ public class Trip {
 
     @Override
     public String toString() {
-        return "Trip{" +
-                "city='" + city + '\'' +
-                ", start=" + start +
-                ", end=" + end +
-                ", attractions=" + attractions +
-                '}';
+        return "Trip{" + "city='" + city + '\'' + ", start=" + start + ", end=" + end + ", attractions=" + attractions + '}';
     }
 }

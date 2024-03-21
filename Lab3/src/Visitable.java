@@ -1,15 +1,16 @@
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Map;
 
 public interface Visitable {
-    HashMap<LocalDate, TimeInterval> timeTable = null;
+    Map<LocalDate, TimeInterval> timeTable = new HashMap<LocalDate, TimeInterval>();
 
-    HashMap<LocalDate, TimeInterval> getTimeTable();
+    Map<LocalDate, TimeInterval> getTimeTable();
 
-    void setTimeTable(HashMap<LocalDate, TimeInterval> timeTable);
+    void setTimeTable(Map<LocalDate, TimeInterval> timeTable);
     default LocalTime getOpeningHour(LocalDate date) {
-        return timeTable.get(date).first;
+        return timeTable.get(date).start;
     }
 }

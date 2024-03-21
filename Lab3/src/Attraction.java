@@ -23,6 +23,6 @@ public abstract class Attraction
     @Override
     public int compareTo(Attraction other) {
         if(other == null) throw new NullPointerException();
-            return this.name.compareTo(other.name);
+        return this.name.compareTo(other.name);
     }
 }
