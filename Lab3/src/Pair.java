@@ -1,34 +1,34 @@
 import java.util.Objects;
 
 public class Pair<T, U> {
-    protected T first;
-    protected U second;
-    public Pair(T first, U second) {
-        this.first = first;
-        this.second = second;
+    protected T start;
+    protected U end;
+    public Pair(T start, U end) {
+        this.start = start;
+        this.end = end;
     }
 
     public T getFirst() {
-        return first;
+        return start;
     }
 
     public U getSecond() {
-        return second;
+        return end;
     }
 
-    public void setFirst(T first) {
-        this.first = first;
+    public void setFirst(T open) {
+        this.start = open;
     }
 
-    public void setSecond(U second) {
-        this.second = second;
+    public void setSecond(U closed) {
+        this.end = closed;
     }
 
     @Override
     public String toString() {
         return "Pair{" +
-                "first=" + first +
-                ", second=" + second +
+                "first=" + start +
+                ", second=" + end +
                 '}';
     }
 
@@ -37,6 +37,35 @@ public class Pair<T, U> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pair<?, ?> pair = (Pair<?, ?>) o;
-        return Objects.equals(first, pair.first) && Objects.equals(second, pair.second);
+        return Objects.equals(start, pair.start) && Objects.equals(end, pair.end);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -77,6 +77,14 @@ public class Solution {
 
 
     public void allPairsShortestPaths() {
+
+        /*create list of adjacencies
+        create matrix of nodes, add randomly at first, then randomly pick a adjacent node and pick randomly from the list next
+        build a cost matrix
+        fw on cost matrix
+        iterate over clients to allocate greedily, keep in mind the paths
+        maybe format as a map of symbols
+         */
         int tourCount = problem.getVehicles().length;
         int tourIndex = 0;
 

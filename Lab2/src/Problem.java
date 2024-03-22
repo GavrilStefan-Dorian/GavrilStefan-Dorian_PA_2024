@@ -1,5 +1,6 @@
 import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Models an instance of VRP problem
@@ -12,7 +13,19 @@ public class Problem {
     private int[][] timesDepotsToClients;
     private int[][] timesClientsToClients;
 
-    private int[][] gridDepotsClients;
+    private List<List<Integer>> graphDepotsClients;
+
+    /* generate random number of depots and clients
+    add them to the vectors
+    allocate in the list as necessary
+    generate costs
+    apply floyd warshall to the matrix
+    then, how do i choose gredily ?
+
+    for n depots and m clients
+    0..n depots, n..m clients
+    depot 1- client 1: [0][n] [n][0]
+     */
     private int[][] gridCostMatrix;
 
     public Problem(String name, Depot[] depots, Client[] clients, Vehicle[] vehicles) {
@@ -72,6 +85,7 @@ public class Problem {
         for (int i = 0; i < numDepots; i++) {
             for (int j = 0; j < numClients; j++) {
                 timesDepotsToClients[i][j] = (int) (Math.random() * 200);
+                gridCostMatrix[i][j]
             }
         }
         for (int i = 0; i < numClients; i++) {
