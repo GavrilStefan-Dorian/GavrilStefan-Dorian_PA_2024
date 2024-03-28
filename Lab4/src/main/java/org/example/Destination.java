@@ -1,6 +1,6 @@
 package org.example;
 
-public class Destination {
+public class Destination implements Comparable<Destination>{
     private String name;
 
     public Destination(String name) {
@@ -16,5 +16,10 @@ public class Destination {
         return "Destination{" +
                 "name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Destination o) {
+            return o.getName().compareTo(this.getName());
     }
 }
