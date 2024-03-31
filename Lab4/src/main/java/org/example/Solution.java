@@ -1,7 +1,6 @@
 package org.example;
 
 import org.graph4j.alg.matching.HopcroftKarpMaximumMatching;
-import org.graph4j.util.Matching;
 
 import java.util.*;
 
@@ -17,7 +16,6 @@ public class Solution {
         List<Person> passengers = new ArrayList<>(problem.getListOfPassengers());
 
         for (Person driver : problem.getListOfDrivers()) {
-            driver = (Driver) driver;
             for (Person passenger : passengers) {
 
                     if (Objects.equals(driver.getDestination().getName(), passenger.getDestination().getName()) || ((Driver) driver).getPathToDestination().contains(passenger.getDestination())) {
@@ -41,15 +39,13 @@ public class Solution {
 
         //Iterate edges to create driver-passenger mapping
         for (int driverIndex = 0; driverIndex < driversCount; driverIndex++) {
-            System.out.println(driverIndex);
-            System.out.println(matching);
-            OptionalInt passengerIndex = OptionalInt.of(matching.mate(driverIndex));
-            if(passengerIndex.getAsInt() != -1)
-                System.out.println(matching.mate(driverIndex));
+            int passengerIndex = matching.mate(driverIndex);
 
-            String driverName = problem.getListOfDrivers().get(driverIndex).getName();
-            //String passengerName = problem.getListOfPassengers().get(passengerIndex - driversCount).getName();
-            //driverPassengerMap.put("Driver: " + driverName, "Passenger: " + passengerName);
+            if(passengerIndex != -1) {
+                String driverName = problem.getListOfDrivers().get(driverIndex).getName();
+                String passengerName = problem.getListOfPassengers().get(passengerIndex - driversCount).getName();
+                driverPassengerMap.put("Driver: " + driverName, "Passenger: " + passengerName);
+            }
         }
 
         return driverPassengerMap;

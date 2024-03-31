@@ -30,10 +30,10 @@ public class Main {
                         List<Destination> listRandomDestinations = new ArrayList<>(listDestinations);
 
                         int randomDestinationsCount = random.nextInt(listDestinationsLength - 1);
-                        int randomDestinationIndex;
+                        int randomDestinationIndex = random.nextInt(listRandomDestinations.size() - 1);
 
                         for(int j = 0; j < randomDestinationsCount; j++, randomDestinationIndex = random.nextInt(listRandomDestinations.size() - 1))
-                            listRandomDestinations.remove(random.nextInt(listRandomDestinations.size() - 1));
+                            listRandomDestinations.remove(randomDestinationIndex);
 
                         return new Driver(faker.name().firstName(), random.nextInt(18,60), randomDestination, listRandomDestinations);
                     }
@@ -42,7 +42,7 @@ public class Main {
 
         List<Person> listOfPersons = new ArrayList<>(Arrays.asList(arrayPersons));
 
-        Map<Destination, List<Person>> destMap = new HashMap<>();
+        //Map<Destination, List<Person>> destMap = new HashMap<>();
 
 //        Destination destination1 = new Destination("Botosani");
 //        Destination destination2 = new Destination("Iasi");
@@ -98,11 +98,18 @@ public class Main {
         System.out.println("\n\n\nBonus\n\n");
 
         ProblemGenerator problemGenerator = new ProblemGenerator();
-        Problem problem2 = problemGenerator.generateProblem(50, 50, 0.01);
+        Problem problem2 = problemGenerator.generateProblem(500, 500, 0.1);
         Solution solution2 = new Solution(problem2);
 
+//        System.out.println(problem2.getListOfPassengers());
+//        System.out.println(problem2.getListOfDrivers());
+        System.out.println("\nGreedy\n");
         System.out.println(solution2.greedyMatch());
-        System.out.println("\nhopcroft\n");
+        System.out.println("\nHopcroft\n");
+        System.out.println(solution2.hopcroftKarpMatch());
+        System.out.println("\nGreedy\n");
+        System.out.println(solution2.greedyMatch());
+        System.out.println("\nHopcroft\n");
         System.out.println(solution2.hopcroftKarpMatch());
 
     }
