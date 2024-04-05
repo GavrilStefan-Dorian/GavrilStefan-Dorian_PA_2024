@@ -1,1 +1,19 @@
-{"directory":"C:\\Users\\tsaaa\\IdeaProjects\\GavrilStefan-Dorian_PA_2024\\Lab5\\repo_employees","documents":{"Person[id=2, name=stefan]":[{"title":"lab3","fileType":"png"},{"title":"web02ProgramareWeb-HTTP-CGI","fileType":"pdf"}],"Person[id=1, name=tudor]":[{"title":"script_populare_student","fileType":"sql"},{"title":"something","fileType":"txt"}]}}
+{
+  "directory" : "C:\\Users\\tsaaa\\IdeaProjects\\GavrilStefan-Dorian_PA_2024\\Lab5\\repo_employees",
+  "documents" : {
+    "Person[id=2, name=stefan]" : [ {
+      "title" : "lab3",
+      "fileType" : "png"
+    }, {
+      "title" : "web02ProgramareWeb-HTTP-CGI",
+      "fileType" : "pdf"
+    } ],
+    "Person[id=1, name=tudor]" : [ {
+      "title" : "script_populare_student",
+      "fileType" : "sql"
+    }, {
+      "title" : "something",
+      "fileType" : "txt"
+    } ]
+  }
+}
