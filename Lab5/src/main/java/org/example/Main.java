@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws IOException, TemplateException {
+    public static void main(String[] args) throws IOException, TemplateException, InvalidCommand {
         Main app = new Main();
 
         List<String> allAbilities = Arrays.asList("SoftDev",
@@ -22,10 +22,10 @@ public class Main {
                 "UI/UX");
 
         ExcelGenerator.generateRandomExcel("random_dataset.xlsx", 15, 4, allAbilities);
-        ExcelReader.getExcelMaxCliques("random_dataset.xlsx", allAbilities);
+        ExcelCliquesPrinter.getExcelMaxCliques("random_dataset.xlsx", allAbilities);
         app.simulateShell();
     }
-    private void simulateShell() throws IOException, TemplateException {
+    private void simulateShell() throws IOException, TemplateException, InvalidCommand {
         var service = new RepositoryService();
         System.out.println("\n\tHomework");
 
@@ -40,8 +40,8 @@ public class Main {
             System.out.print("\nEnter command: ");
             commandLine = console.readLine();
 
-//            if (commandLine.isEmpty())
-//                continue;
+            if (commandLine.isEmpty())
+                continue;
 
             String[] split = commandLine.split(" ",2);
             String command = split[0];
@@ -49,20 +49,20 @@ public class Main {
             if (command.equals("view")) {
                 service.view(split[1]);
             }
-
-            if (command.equals("export")) {
+            else if (command.equals("export")) {
                 String[] arguments = split[1].split(" ");
                 service.export(new Repository(arguments[0]), arguments[1]);
             }
 
-            if (command.equals("report")) {
+            else if (command.equals("report")) {
                 String[] arguments = split[1].split(" ");
                 service.report(new Repository(arguments[0]), arguments[1]);
             }
 
-            if (commandLine.equals("exit")) {
+            else if (commandLine.equals("exit")) {
                 System.exit(0);
             }
+            else throw new InvalidCommand();
         }
     }
 }

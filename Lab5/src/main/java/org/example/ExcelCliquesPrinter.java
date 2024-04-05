@@ -10,9 +10,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
 
-public class ExcelReader {
+public class ExcelCliquesPrinter {
 
-    public ExcelReader(String filename, List<String> allAbilities) {
+    public ExcelCliquesPrinter(String filename, List<String> allAbilities) {
         getExcelMaxCliques(filename, allAbilities);
     }
 

@@ -9,7 +9,7 @@ import java.util.*;
 
 public class ExcelGenerator {
 
-    public ExcelGenerator(int rows, int abilitiesCount) {
+    public ExcelGenerator() {
     }
 
     public static void generateRandomExcel(String filename, int rows, int maxAbilitiesPerEmployee, List<String> allAbilities) {

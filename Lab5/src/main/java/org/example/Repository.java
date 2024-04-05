@@ -25,7 +25,7 @@ public class Repository {
                     if(Files.isDirectory(file)) {
                         String dirName = file.getFileName().toString();
                         if(dirName.compareTo(directory.substring(directory.lastIndexOf('\\') + 1)) != 0) {
-                            String[] split = dirName.split("_");
+                            String[] split = dirName.split(";");
                             String personName = split[0];
 
                             int personId = Integer.parseInt(split[1]);
@@ -34,8 +34,8 @@ public class Repository {
                         }
                     } else if(Files.isRegularFile(file)) {
                         String parentDirName = file.getParent().getFileName().toString();
-                        String personName = parentDirName.substring(0, parentDirName.lastIndexOf('_'));
-                        int personId = Integer.parseInt(parentDirName.substring(parentDirName.lastIndexOf('_') + 1));
+                        String personName = parentDirName.substring(0, parentDirName.lastIndexOf(';'));
+                        int personId = Integer.parseInt(parentDirName.substring(parentDirName.lastIndexOf(';') + 1));
 
                         Person person = new Person(personId, personName);
 
