@@ -3,10 +3,10 @@ package org.example;
 import javax.swing.*;
 
 import java.awt.*;
+import java.io.Serializable;
 
-import static javax.swing.SwingConstants.*;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements Serializable {
     ConfigPanel configPanel;
     ControlPanel controlPanel;
     DrawingPanel canvas;
