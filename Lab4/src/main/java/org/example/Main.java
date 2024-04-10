@@ -98,7 +98,7 @@ public class Main {
         System.out.println("\n\n\nBonus\n\n");
 
         ProblemGenerator problemGenerator = new ProblemGenerator();
-        Problem problem2 = problemGenerator.generateProblem(500, 500, 0.1);
+        Problem problem2 = problemGenerator.generateProblem(50, 50, 0.5);
         Solution solution2 = new Solution(problem2);
 
 //        System.out.println(problem2.getListOfPassengers());
@@ -107,10 +107,10 @@ public class Main {
         System.out.println(solution2.greedyMatch());
         System.out.println("\nHopcroft\n");
         System.out.println(solution2.hopcroftKarpMatch());
-        System.out.println("\nGreedy\n");
-        System.out.println(solution2.greedyMatch());
-        System.out.println("\nHopcroft\n");
-        System.out.println(solution2.hopcroftKarpMatch());
+//        System.out.println("\nGreedy\n");
+//        System.out.println(solution2.greedyMatch());
+//        System.out.println("\nHopcroft\n");
+//        System.out.println(solution2.hopcroftKarpMatch());
 
     }
 }

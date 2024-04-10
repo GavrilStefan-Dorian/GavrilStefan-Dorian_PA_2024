@@ -3,6 +3,8 @@ package org.example;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
@@ -33,7 +35,7 @@ public class ExcelGenerator {
                 row.createCell(1).setCellValue(abilitiesString.toString());
             }
 
-            FileOutputStream fileOut = new FileOutputStream(filename);
+            FileOutputStream fileOut = new FileOutputStream(new File(filename));
             workbook.write(fileOut);
             fileOut.close();
 

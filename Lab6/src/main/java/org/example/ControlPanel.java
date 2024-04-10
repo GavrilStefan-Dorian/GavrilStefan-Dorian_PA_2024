@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.*;
+import java.util.Arrays;
 
 public class ControlPanel extends JPanel implements Serializable{
     final MainFrame frame;
@@ -32,25 +33,21 @@ public class ControlPanel extends JPanel implements Serializable{
     }
     private void loadGame(ActionEvent event) {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("saved_game.txt"))) {
-            DrawingPanel savedCanvas = (DrawingPanel) in.readObject(); //new DrawingPanel(frame, ((DrawingPanel) in.readObject()).stones);
-            // stones
-            //frame.canvas.stones.clear();
-            //frame.canvas.stones.putAll(savedCanvas.stones);
-            // player turn
+            DrawingPanel savedCanvas = (DrawingPanel) in.readObject();
             frame.canvas.playerOneTurn = savedCanvas.playerOneTurn;
+            //keep sticks from saved canvas, don't generate new ones
+            frame.canvas.generateSticks = false;
             // last move
             frame.canvas.lastPlacedStone = savedCanvas.lastPlacedStone;
-            // sticks
-            frame.canvas.sticks.clear();
-            frame.canvas.sticks.addAll(savedCanvas.sticks);
-            // subgraph
-            //frame.canvas.connectedNodes.clear();
-            //frame.canvas.connectedNodes.addAll(savedCanvas.connectedNodes);
             //rows cols
+            frame.canvas.subgraph = savedCanvas.subgraph;
+
+            frame.canvas.grid = Arrays.stream(savedCanvas.grid)
+                    .map(int[]::clone)
+                    .toArray(int[][]::new);
+
             frame.configPanel.spinnerRows.setValue(savedCanvas.rows);
             frame.configPanel.spinnerCols.setValue(savedCanvas.cols);
-            //keep sticks from saved canvas
-            frame.canvas.generateSticks = false;
 
             frame.canvas.update(frame.canvas.offscreen);
         } catch (IOException e) {

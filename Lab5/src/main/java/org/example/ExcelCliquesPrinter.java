@@ -6,6 +6,7 @@ import org.graph4j.GraphBuilder;
 import org.graph4j.alg.clique.BronKerboschCliqueIterator;
 import org.graph4j.util.Clique;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
@@ -17,7 +18,9 @@ public class ExcelCliquesPrinter {
     }
 
     public static void getExcelMaxCliques(String filename, List<String> allAbilities) {
-        try (Workbook workbook = new XSSFWorkbook(new FileInputStream(filename))) {
+        try (FileInputStream excelDeschide_te = new FileInputStream(
+                new File("C:\\Users\\tsaaa\\IdeaProjects\\GavrilStefan-Dorian_PA_2024\\Lab5\\random_dataset.xlsx"));
+             Workbook workbook = WorkbookFactory.create(excelDeschide_te)){
             Sheet sheet = workbook.getSheetAt(0);
 
             Map<Integer, Set<Integer>> personAbilitiesMap = new HashMap<>();
