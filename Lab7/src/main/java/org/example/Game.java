@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Game {
-    private final Bag bag = new Bag(4);
+    private final Bag bag = new Bag(5);
     private final List<Player> players = new ArrayList<>();
     private boolean isRunning = true;
     private Player foundWinner = null;
@@ -13,8 +13,8 @@ public class Game {
     public static void main(String[] args) throws InterruptedException {
         Game game = new Game();
         game.addPlayer(new Player("Player 1", true));
-//        game.addPlayer(new Player("Player 2", true));
-//        game.addPlayer(new Player("Player 3", true));
+        game.addPlayer(new Player("Player 2", false));
+//        game.addPlayer(new Player("Player 3", false));
         game.play();
     }
 

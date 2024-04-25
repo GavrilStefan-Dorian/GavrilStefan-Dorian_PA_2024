@@ -1,18 +1,10 @@
 package org.example;
-
-//import org.graph4j.Graph;
-//import org.graph4j.GraphBuilder;
-//import org.jgrapht.Graph;
-
-import org.jgrapht.Graph;
-import org.jgrapht.GraphTests;
-import org.jgrapht.generate.CompleteGraphGenerator;
-import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.graph.DefaultUndirectedGraph;
-import org.jgrapht.alg.tour.PalmerHamiltonianCycle;
-import org.jgrapht.graph.SimpleGraph;
-
-import java.sql.SQLOutput;
+import org.graph4j.Graph;
+import org.graph4j.GraphBuilder;
+import org.graph4j.util.Cycle;
+import org.graph4j.util.IntArrays;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,13 +12,15 @@ public class Player implements Runnable {
     private String name;
     private Game game;
     private List<Tile> tiles = new ArrayList<>();
-    Graph<Integer, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
+    private final Lock lock = new ReentrantLock();
+    Graph graph;
     private int score;
-    private boolean isSmart;
+    private final boolean isSmart;
 
     public Player(String name, boolean isSmart) {
         this.name = name;
         this.isSmart = isSmart;
+        graph = GraphBuilder.empty().buildGraph();
 
     }
 
@@ -48,8 +42,10 @@ public class Player implements Runnable {
                     throw new RuntimeException(e);
                 }
                 List<Tile> pickedTiles = game.getBag().extractTile(1);
-                tiles.addAll(pickedTiles);
-                graph.addEdge(pickedTiles.get(0).getFirst(), pickedTiles.get(0).getSecond());
+                if(!pickedTiles.isEmpty()) {
+                    tiles.addAll(pickedTiles);
+                    graph.addEdge(pickedTiles.get(0).getFirst(), pickedTiles.get(0).getSecond());
+                }
                 this.score = tiles.size();
 
                 if (game.getBag().getTiles().isEmpty() || game.getFoundWinner() != null) {
@@ -71,54 +67,122 @@ public class Player implements Runnable {
     }
 
     private void checkSequence() {
-        List<Integer> numbers = new ArrayList<>();
         int n = game.getBag().getSize();
         int tileCount = 0;
 
-        for (int i = 1; i <= n; i++) {
-            numbers.add(i);
-        }
+        var newGraph = GraphBuilder.empty().buildGraph();
 
         while (game.isRunning()) {
-            List<Tile> currentTiles;
-            synchronized (tiles) {
-                currentTiles = new ArrayList<>(tiles);
-            }
+            List<Tile> currentTiles = new ArrayList<>(tiles);
 
             if (tileCount != currentTiles.size()) {
                 tileCount = currentTiles.size();
+                newGraph = GraphBuilder.empty().buildGraph();
 
-                for (Tile tile : currentTiles) {
-                    numbers.remove((Object) tile.getFirst());
-                    numbers.remove((Object) tile.getSecond());
+                Tile firstTile = currentTiles.get(0);
+                newGraph.addVertex(firstTile.getFirst());
+                newGraph.addVertex(firstTile.getSecond());
+                newGraph.addEdge(firstTile.getFirst(), firstTile.getSecond());
+
+                boolean done = false;
+                while(!done) {
+                    done = true;
+                    forLoop:
+                    for (Tile tile : currentTiles) {
+                        if (tile.getFirst() == firstTile.getSecond() && tile != firstTile
+                        && !newGraph.containsVertex(tile.getSecond())) {
+                            newGraph.addVertex(tile.getSecond());
+                            newGraph.addEdge(tile.getFirst(), tile.getSecond());
+                            done = false;
+                            break forLoop;
+                        }
+                    }
                 }
-                if (numbers.isEmpty() && game.getFoundWinner() == null) {
+                if (newGraph.numVertices() == n && game.getFoundWinner() == null) {
                     game.setRunning(false);
                     game.setFoundWinner(this);
+                    System.out.println("Sequence is: " + new Cycle(newGraph, newGraph.vertices()));
                 }
             }
         }
     }
-
-    private void crissCross() {
-//        var g = GraphBuilder.numVertices(tiles.size()).buildGraph();
-
-        while (game.isRunning()) {
-            if (GraphTests.hasOreProperty(graph)){
-                game.setRunning(false);
-                game.setFoundWinner(this);
-                System.out.println("Sequence is: " + new PalmerHamiltonianCycle<Integer, DefaultEdge>().getTour(graph));
+    public boolean hasOreProperty(Graph graph) {
+        int n = graph.numVertices();
+        if (n < 3) {
+            return false;
+        }
+        int[] nodes = graph.vertices();
+        int[] deg = graph.degrees();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (deg[i] + deg[j] < n && !graph.containsEdge(nodes[i], nodes[j])) {
+                    return false;
+                }
             }
         }
-//        for (int i = 0; i < n; i++) {
-//            for (int j = i + 1; j < n; j++) {
-//                if (graph.containsEdge(i, j) && graph.containsEdge(j, i)) { // Non-adjacent vertices
-//                    int degreeSum = graph.degreeOf(i) + graph.degreeOf(j);
-//                    if (degreeSum < n) {
-//                    }
-//                }
-//            }
-//        }
+        return true;
+    }
+
+    private void crissCross() {
+        long m = 0;
+        while (game.isRunning()) {
+            lock.lock();
+                if(graph.numEdges() != m) {
+                    m = graph.numEdges();
+                    if (hasOreProperty(graph)) {
+                        game.setRunning(false);
+                        game.setFoundWinner(this);
+                        System.out.println("Sequence is: " + PalmerAlgorithmCycle(graph));
+                    }
+                }
+            lock.unlock();
+            }
+        }
+
+    private Cycle PalmerAlgorithmCycle(Graph graph) {
+        int n = graph.numVertices();
+        int[] nodes = IntArrays.copyOf(graph.vertices());
+        boolean foundGap = true;
+
+        while(foundGap){
+            foundGap = false;
+            for (int i = 0; i < n; i++) {
+                // Check for a gap between nodes i and i+1 (clockwise direction)
+                if (!graph.containsEdge(nodes[i], nodes[(i + 1) % n])) {
+                    foundGap = true;
+                    // Find last node of gap
+                    int lastNode = (i + 1) % n;
+                    for (int j = i + 2; j < i + n; j++) {
+                        if (graph.containsEdge(nodes[i], nodes[j % n])
+                                && graph.containsEdge(nodes[(i + 1) % n], nodes[(j + 1) % n])) {
+                            lastNode = j % n;
+                            break;
+                        }
+                    }
+
+                    // Swap chords and fil two gaps
+                    int firstNode = i + 1;
+                    if (firstNode >= lastNode) {
+                        firstNode = (lastNode + 1) % n;
+                        lastNode = i;
+                    }
+                    for (int offset = 0; offset < (lastNode - firstNode + 1) / 2; offset++) {
+                        int temp = nodes[firstNode + offset];
+                        nodes[firstNode + offset] = nodes[lastNode - offset];
+                        nodes[lastNode - offset] = temp;
+                    }
+                    break;
+                }
+            }
+        }
+
+        var newHamiltonianGraph = GraphBuilder.empty().buildGraph();
+        for (int i = 0; i < n; i++)
+            newHamiltonianGraph.addVertex(nodes[i]);
+        for (int i = 0; i < n; i++)
+            newHamiltonianGraph.addEdge(nodes[i], nodes[(i + 1) % n]);
+
+        return new Cycle(newHamiltonianGraph, nodes);
     }
     public Game getGame() {
         return game;
