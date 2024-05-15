@@ -2,59 +2,38 @@ package org.example;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 public class Database {
-    private static final String URL = "jdbc:postgresql://localhost:5432/library";
+    private static final String URL = "jdbc:postgresql://localhost:5432/Books_Lab8Java";
     // create the db
-    private static final String USER = "user";
-    private static final String PASSWORD = "1000";
-    private static Connection connection = null;
+    private static final String USER = "postgres";
+    private static final String PASSWORD = "postgres";
+    private static final HikariConfig config = new HikariConfig();
+    private static HikariDataSource dataSource;
 
     private Database() {}
 
-    public static Connection getConnection() {
-        if (connection == null) {
-            createConnection();
+    public static Connection getConnection() throws SQLException {
+        if (dataSource == null) {
+            createDataSource();
         }
-        return connection;
+        return dataSource.getConnection();
     }
 
-    private static void createConnection() {
-        try {
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            connection.setAutoCommit(false);
-        } catch (SQLException e) {
-            System.err.println("Error connecting to database: " + e.getMessage());
-        }
+    private static void createDataSource() {
+        config.setJdbcUrl(URL);
+        config.setUsername(USER);
+        config.setPassword(PASSWORD);
+        config.addDataSourceProperty("cachePrepStmts", "true");
+        config.addDataSourceProperty("prepStmtCacheSize", "250");
+        config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+        dataSource = new HikariDataSource(config);
     }
 
-    public static void closeConnection() {
-        try {
-            if (connection != null) {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            System.err.println("Error closing database connection: " + e.getMessage());
-        }
-    }
-
-    public static void commit() {
-        try {
-            if (connection != null) {
-                connection.commit();
-            }
-        } catch (SQLException e) {
-            System.err.println("Error committing transaction: " + e.getMessage());
-        }
-    }
-
-    public static void rollback() {
-        try {
-            if (connection != null) {
-                connection.rollback();
-            }
-        } catch (SQLException e) {
-            System.err.println("Error rolling back transaction: " + e.getMessage());
-        }
+    public static void closeDataSource() {
+        if (dataSource != null)
+            dataSource.close();
     }
 }

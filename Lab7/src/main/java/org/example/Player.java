@@ -69,7 +69,6 @@ public class Player implements Runnable {
     private void checkSequence() {
         int n = game.getBag().getSize();
         int tileCount = 0;
-
         var newGraph = GraphBuilder.empty().buildGraph();
 
         while (game.isRunning()) {
@@ -78,30 +77,45 @@ public class Player implements Runnable {
             if (tileCount != currentTiles.size()) {
                 tileCount = currentTiles.size();
                 newGraph = GraphBuilder.empty().buildGraph();
+                int[] nodes = new int[n];
+                int nodeCount = 0;
 
                 Tile firstTile = currentTiles.get(0);
                 newGraph.addVertex(firstTile.getFirst());
                 newGraph.addVertex(firstTile.getSecond());
                 newGraph.addEdge(firstTile.getFirst(), firstTile.getSecond());
+                nodes[nodeCount++] = firstTile.getFirst();
+                nodes[nodeCount++] = firstTile.getSecond();
+
+                Tile prevTile = firstTile;
 
                 boolean done = false;
                 while(!done) {
                     done = true;
                     forLoop:
                     for (Tile tile : currentTiles) {
-                        if (tile.getFirst() == firstTile.getSecond() && tile != firstTile
-                        && !newGraph.containsVertex(tile.getSecond())) {
+                        if (tile.getFirst() == prevTile.getSecond()
+                                && !newGraph.containsVertex(tile.getSecond())) {
                             newGraph.addVertex(tile.getSecond());
                             newGraph.addEdge(tile.getFirst(), tile.getSecond());
+                            nodes[nodeCount++] = tile.getSecond();
+                            prevTile = tile;
                             done = false;
                             break forLoop;
                         }
                     }
                 }
+
+//                for(Tile tile : currentTiles) {
+//                    if(tile.getFirst() == prevTile.getSecond() && tile.getSecond() == firstTile.getFirst()) {
+//                        newGraph.addEdge(tile.getFirst(), tile.getSecond());
+//                        break;
+//                    }
+//                }
                 if (newGraph.numVertices() == n && game.getFoundWinner() == null) {
                     game.setRunning(false);
                     game.setFoundWinner(this);
-                    System.out.println("Sequence is: " + new Cycle(newGraph, newGraph.vertices()));
+                    System.out.println("Sequence is: " + new Cycle(newGraph, nodes));
                 }
             }
         }
@@ -115,6 +129,14 @@ public class Player implements Runnable {
         int[] deg = graph.degrees();
         for (int i = 0; i < n - 1; i++) {
             for (int j = i + 1; j < n; j++) {
+                try {
+                    graph.containsEdge(nodes[i], nodes[j]);
+                }
+                catch(Exception e){
+                    System.out.println(e.getMessage());
+                    System.out.println("Checking for edge: [" + nodes[i] + ", " + nodes[j] + "]");
+                    System.out.println("Graph is: " + graph);
+                }
                 if (deg[i] + deg[j] < n && !graph.containsEdge(nodes[i], nodes[j])) {
                     return false;
                 }

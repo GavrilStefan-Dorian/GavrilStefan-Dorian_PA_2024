@@ -1,12 +1,19 @@
-package org.example;
+package com.example.lab9.entities;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="authors", schema ="public")
 public class Author {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private int id;
+
+    @Column(name="name", unique = true)
     private String name;
-    public Author(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+
     public int getId() {
         return id;
     }

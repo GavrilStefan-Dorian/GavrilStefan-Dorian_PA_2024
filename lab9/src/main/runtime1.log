@@ -1,0 +1,54 @@
+00:34:19,166 INFO  [org.hibernate.jpa.internal.util.LogHelper] - HHH000204: Processing PersistenceUnitInfo [name: Lab9PU]
+00:34:19,321 INFO  [org.hibernate.Version] - HHH000412: Hibernate ORM core version 6.0.2.Final
+00:34:20,344 WARN  [org.hibernate.orm.connections.pooling] - HHH10001002: Using built-in connection pool (not intended for production use)
+00:34:20,356 INFO  [org.hibernate.orm.connections.pooling] - HHH10001005: Loaded JDBC driver class: org.postgresql.Driver
+00:34:20,357 INFO  [org.hibernate.orm.connections.pooling] - HHH10001012: Connecting with JDBC URL [jdbc:postgresql://localhost:5432/Books_Lab8Java]
+00:34:20,358 INFO  [org.hibernate.orm.connections.pooling] - HHH10001001: Connection properties: {password=****, user=postgres}
+00:34:20,358 INFO  [org.hibernate.orm.connections.pooling] - HHH10001003: Autocommit mode: false
+00:34:20,364 INFO  [org.hibernate.orm.connections.pooling] - HHH10001115: Connection pool size: 20 (min=1)
+00:34:20,942 INFO  [SQL dialect] - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+00:34:23,306 WARN  [org.hibernate.orm.deprecation] - HHH90000021: Encountered deprecated setting [javax.persistence.schema-generation.database.action], use [jakarta.persistence.schema-generation.database.action] instead
+00:34:23,317 INFO  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator] - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+00:34:23,350 INFO  [org.hibernate.jpa.internal.util.LogHelper] - HHH000204: Processing PersistenceUnitInfo [name: Lab9PU]
+00:34:23,370 WARN  [org.hibernate.orm.connections.pooling] - HHH10001002: Using built-in connection pool (not intended for production use)
+00:34:23,371 INFO  [org.hibernate.orm.connections.pooling] - HHH10001005: Loaded JDBC driver class: org.postgresql.Driver
+00:34:23,371 INFO  [org.hibernate.orm.connections.pooling] - HHH10001012: Connecting with JDBC URL [jdbc:postgresql://localhost:5432/Books_Lab8Java]
+00:34:23,371 INFO  [org.hibernate.orm.connections.pooling] - HHH10001001: Connection properties: {password=****, user=postgres}
+00:34:23,371 INFO  [org.hibernate.orm.connections.pooling] - HHH10001003: Autocommit mode: false
+00:34:23,371 INFO  [org.hibernate.orm.connections.pooling] - HHH10001115: Connection pool size: 20 (min=1)
+00:34:23,562 INFO  [SQL dialect] - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+00:34:23,671 WARN  [org.hibernate.orm.deprecation] - HHH90000021: Encountered deprecated setting [javax.persistence.schema-generation.database.action], use [jakarta.persistence.schema-generation.database.action] instead
+00:34:23,674 INFO  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator] - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+00:34:23,816 DEBUG [org.hibernate.SQL] - insert into public.books (genres, language, pages, publication_date, title) values (?, ?, ?, ?, ?)
+00:34:23,860 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - SQL Error: 0, SQLState: 23505
+00:34:23,860 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - ERROR: duplicate key value violates unique constraint "uk_5mtto2jcmfrwfg0p1ui8mnweu"
+  Detail: Key (title)=(Random25) already exists.
+00:34:23,874 DEBUG [org.hibernate.SQL] - insert into public.authors (name) values (?)
+00:34:23,877 WARN  [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - SQL Error: 0, SQLState: 23505
+00:34:23,877 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - ERROR: duplicate key value violates unique constraint "uk_9mhkwvnfaarcalo4noabrin5j"
+  Detail: Key (name)=(Craigss25 Robertson) already exists.
+00:34:23,880 INFO  [org.hibernate.orm.connections.pooling] - HHH10001008: Cleaning up connection pool [jdbc:postgresql://localhost:5432/Books_Lab8Java]
+00:56:40,310 INFO  [org.hibernate.jpa.internal.util.LogHelper] - HHH000204: Processing PersistenceUnitInfo [name: Lab9PU]
+00:56:40,479 INFO  [org.hibernate.Version] - HHH000412: Hibernate ORM core version 6.0.2.Final
+00:56:41,525 WARN  [org.hibernate.orm.connections.pooling] - HHH10001002: Using built-in connection pool (not intended for production use)
+00:56:41,535 INFO  [org.hibernate.orm.connections.pooling] - HHH10001005: Loaded JDBC driver class: org.postgresql.Driver
+00:56:41,535 INFO  [org.hibernate.orm.connections.pooling] - HHH10001012: Connecting with JDBC URL [jdbc:postgresql://localhost:5432/Books_Lab8Java]
+00:56:41,536 INFO  [org.hibernate.orm.connections.pooling] - HHH10001001: Connection properties: {password=****, user=postgres}
+00:56:41,536 INFO  [org.hibernate.orm.connections.pooling] - HHH10001003: Autocommit mode: false
+00:56:41,543 INFO  [org.hibernate.orm.connections.pooling] - HHH10001115: Connection pool size: 20 (min=1)
+00:56:42,091 INFO  [SQL dialect] - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+00:56:45,417 WARN  [org.hibernate.orm.deprecation] - HHH90000021: Encountered deprecated setting [javax.persistence.schema-generation.database.action], use [jakarta.persistence.schema-generation.database.action] instead
+00:56:45,430 INFO  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator] - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+00:56:45,461 INFO  [org.hibernate.jpa.internal.util.LogHelper] - HHH000204: Processing PersistenceUnitInfo [name: Lab9PU]
+00:56:45,481 WARN  [org.hibernate.orm.connections.pooling] - HHH10001002: Using built-in connection pool (not intended for production use)
+00:56:45,482 INFO  [org.hibernate.orm.connections.pooling] - HHH10001005: Loaded JDBC driver class: org.postgresql.Driver
+00:56:45,482 INFO  [org.hibernate.orm.connections.pooling] - HHH10001012: Connecting with JDBC URL [jdbc:postgresql://localhost:5432/Books_Lab8Java]
+00:56:45,482 INFO  [org.hibernate.orm.connections.pooling] - HHH10001001: Connection properties: {password=****, user=postgres}
+00:56:45,482 INFO  [org.hibernate.orm.connections.pooling] - HHH10001003: Autocommit mode: false
+00:56:45,482 INFO  [org.hibernate.orm.connections.pooling] - HHH10001115: Connection pool size: 20 (min=1)
+00:56:45,657 INFO  [SQL dialect] - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+00:56:45,775 WARN  [org.hibernate.orm.deprecation] - HHH90000021: Encountered deprecated setting [javax.persistence.schema-generation.database.action], use [jakarta.persistence.schema-generation.database.action] instead
+00:56:45,778 INFO  [org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator] - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+00:56:45,938 DEBUG [org.hibernate.SQL] - insert into public.books (genres, language, pages, publication_date, title) values (?, ?, ?, ?, ?)
+00:56:46,004 DEBUG [org.hibernate.SQL] - insert into public.authors (name) values (?)
+00:56:46,011 INFO  [org.hibernate.orm.connections.pooling] - HHH10001008: Cleaning up connection pool [jdbc:postgresql://localhost:5432/Books_Lab8Java]
