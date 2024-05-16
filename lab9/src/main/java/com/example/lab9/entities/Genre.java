@@ -5,6 +5,11 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name="genres",schema="public")
+@NamedQueries({
+        @NamedQuery(name = "Genre.findById", query = "SELECT g FROM Genre g WHERE g.id = :id"),
+        @NamedQuery(name = "Genre.findByName", query = "SELECT g FROM Genre g WHERE g.name = :myName")
+})
+
 public class Genre {
 
     @Id

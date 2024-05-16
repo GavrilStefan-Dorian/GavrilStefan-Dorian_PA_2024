@@ -8,8 +8,8 @@ import java.util.List;
 @Entity
 @Table(name="books", schema="public")
 @NamedQueries({
-        @NamedQuery(name = "Book.findById", query = "SELECT id FROM Book b WHERE b.id = :myId"),
-        @NamedQuery(name = "Book.findByTitle", query = "SELECT title FROM Book b WHERE b.title LIKE CONCAT('%', :title,'%')")
+        @NamedQuery(name = "Book.findById", query = "SELECT b FROM Book b WHERE b.id = :myId"),
+        @NamedQuery(name = "Book.findByTitle", query = "SELECT b FROM Book b WHERE b.title LIKE CONCAT('%', :myName,'%')")
 })
 public class Book {
 
@@ -40,6 +40,19 @@ public class Book {
     @ManyToOne
     @JoinColumn(name="genres", referencedColumnName = "name")
     private Genre genreName;
+
+    public Book(int id, String title, List<Author> authors, String language, java.sql.Date publication_date, int num_pages, Genre genre) {
+        this.id = id;
+        this.title = title;
+        this.authors = authors;
+        this.language = language;
+        this.publicationDate = publication_date;
+        this.numberOfPages = num_pages;
+        this.genreName = genre;
+    }
+
+    public Book() {
+    }
 
     public int getId() {
         return id;

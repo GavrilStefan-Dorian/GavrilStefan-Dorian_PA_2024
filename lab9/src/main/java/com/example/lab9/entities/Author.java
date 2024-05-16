@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name="authors", schema ="public")
+@NamedQueries({
+        @NamedQuery(name = "Author.findById", query = "SELECT a FROM Author a WHERE a.id = :myId"),
+        @NamedQuery(name = "Author.findByName", query = "SELECT a FROM Author a WHERE a.name LIKE CONCAT('%', :myName,'%')")
+})
 public class Author {
 
     @Id
@@ -13,6 +17,15 @@ public class Author {
 
     @Column(name="name", unique = true)
     private String name;
+
+    public Author(int authorId, String authorName) {
+        id = authorId;
+        name = authorName;
+    }
+
+    public Author() {
+
+    }
 
     public int getId() {
         return id;
