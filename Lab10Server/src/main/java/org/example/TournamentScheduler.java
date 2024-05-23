@@ -10,6 +10,7 @@ public class TournamentScheduler {
        int p = 2; // Maximum games per day
 
        try {
+           // TODO: Create a constraint d days!
            // Create a new environment
            GRBEnv env = new GRBEnv("tournament.log");
            // Create a new model
