@@ -32,10 +32,10 @@ public class GameClient {
             while (true) {
                 System.out.println("Enter command: ");
                 String command = console.readLine();
-                if (command.equalsIgnoreCase("exi2t")) {
+                out.println(command);
+                if (command.equalsIgnoreCase("exit")) {
                     break;
                 }
-                out.println(command);
             }
 
             // Interrupt and join the reader thread when exiting
