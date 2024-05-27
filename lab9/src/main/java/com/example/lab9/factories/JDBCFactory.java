@@ -3,6 +3,7 @@ package com.example.lab9.factories;
 import com.example.lab9.entities.Author;
 import com.example.lab9.entities.Book;
 import com.example.lab9.entities.Genre;
+import com.example.lab9.entities.ReadingList;
 import com.example.lab9.repositories.*;
 
 public class JDBCFactory extends AbstractFactory{
@@ -21,4 +22,7 @@ public class JDBCFactory extends AbstractFactory{
     public Repository<Genre, Integer> createGenreRepository() {
         return new GenreRepositoryJDBC();
     }
+
+    @Override
+    public Repository<ReadingList, Integer> createListRepository() { return new ReadingListRepositoryJDBC(); }
 }

@@ -40,11 +40,11 @@ public class Main {
 //        Statistics statistics = sessionFactory.getStatistics();
 //        statistics.setStatisticsEnabled(true);
 
-//        Repository<Book, Integer> bookRepository = factory.createBookRepository();
-//        Repository<Author, Integer> authorRepository = factory.createAuthorRepository();
-//        Repository<Genre, Integer> genreRepository = factory.createGenreRepository();
-//
-//
+        Repository<Book, Integer> bookRepository = factory.createBookRepository();
+        Repository<Author, Integer> authorRepository = factory.createAuthorRepository();
+        Repository<Genre, Integer> genreRepository = factory.createGenreRepository();
+
+
 //        Book book1 = new Book();
 //        book1.setTitle("Random5");
 //        book1.setLanguage("eng");
