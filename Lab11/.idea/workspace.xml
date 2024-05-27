@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="90742829-d25d-49c3-acaf-a57a4100edc8" name="Changes" comment="Lab11">
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/allclasses-index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/allpackages-index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/element-list" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/help-doc.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/index-all.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/jquery-ui.overrides.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/lab1/Lab1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/lab1/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/lab1/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/legal/COPYRIGHT" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/legal/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/legal/jquery.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/legal/jqueryUI.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/member-search-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/module-search-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/overview-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/package-search-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/resources/glass.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/resources/x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/script-dir/jquery-3.6.1.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/script-dir/jquery-ui.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/script-dir/jquery-ui.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/script.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/search.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/stylesheet.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/tag-search-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab1/src/lab1/type-search-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab10Client/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab10Client/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab10Client/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab10Client/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab10Client/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab10Server/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab10Server/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab10Server/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab10Server/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab10Server/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/Tour.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/allclasses-index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/allpackages-index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/element-list" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/help-doc.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/index-all.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/jquery-ui.overrides.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/legal/COPYRIGHT" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/legal/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/legal/jquery.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/legal/jqueryUI.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/member-search-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/module-search-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/overview-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/package-search-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/resources/glass.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/resources/x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/script-dir/jquery-3.6.1.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/script-dir/jquery-ui.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/script-dir/jquery-ui.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/script.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/search.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/stylesheet.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/tag-search-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab2/src/type-search-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab3/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab3/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab3/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab3/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab3/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab3/Lab3.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab5/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab5/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab5/.idea/artifacts/Lab5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab5/.idea/artifacts/Lab51_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab5/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab5/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab5/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab5/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab5/out/artifacts/Lab5/Lab5.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab5/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab5/templates/repository_report.ftl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab6/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab6/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab6/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab6/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab6/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab6/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab6/src/main/java/module-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab6FX/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab6FX/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab6FX/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab6FX/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab6FX/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab6FX/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab6FX/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab6FX/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab6FX/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab6FX/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab6FX/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab6FX/src/main/java/module-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab6FX/src/main/java/org/example/lab6fx/HelloApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab6FX/src/main/java/org/example/lab6fx/HelloController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab6FX/src/main/resources/org/example/lab6fx/hello-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab7/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab7/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab7/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab7/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab7/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab7/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab7/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/Lab8/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/Lab8/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/Lab8/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/Lab8/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/Lab8/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/Lab8/src/main/java/org/example/Author.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/Lab8/src/main/java/org/example/AuthorDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/Lab8/src/main/java/org/example/Database.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/Lab8/src/main/java/org/example/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/archive/books.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/books.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/older_csvs/archive.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/older_csvs/books.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/older_csvs/newbooks.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/older_csvs/newbooks2.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/older_csvs/oldbooks_2.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab8/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab9/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab9/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab9/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab9/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab9/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab9/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab9/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab9/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab9/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab9/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab9/src/main/java/com/example/lab9/repositories/ReadingListRepositoryJDBC.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab9/src/main/java/com/example/lab9/repositories/ReadingListRepositoryJPA.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab9/src/main/java/com/example/lab9/repositories/Repository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab9/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab9/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab9/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab10.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab10Client/target/classes/org/example/GameClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab10Client/target/classes/org/example/GameClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab10Server.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab10Server/target/classes/org/example/ClientThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab10Server/target/classes/org/example/ClientThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab10Server/target/classes/org/example/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab10Server/target/classes/org/example/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab10Server/target/classes/org/example/GameServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab10Server/target/classes/org/example/GameServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab10Server/tournament.log" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab10Server/tournament.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab11.zip" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab11.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Lab11.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab11/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Lab11/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/DemoApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/src/test/java/com/example/demo/DemoApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab8/src/main/java/org/example/PartitionerReadingLists.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab8/src/main/java/org/example/PartitionerReadingLists.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo (1).zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo (1)/.idea/demo (1).iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo (1)/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo (1)/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo (1)/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo (1)/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo (1)/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo (1)/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo (1)/demo/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo (1)/demo/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo (1)/demo/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo (1)/demo/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo (1)/demo/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo (1)/demo/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo (1)/demo/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo (1)/demo/src/main/java/com/example/demo/DemoApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo (1)/demo/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo (1)/demo/src/test/java/com/example/demo/DemoApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo (2).zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gs-rest-service" beforeDir="false" afterPath="$PROJECT_DIR$/../gs-rest-service" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab9/src/main/java/com/example/lab9/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab9/src/main/java/com/example/lab9/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab9/src/main/java/com/example/lab9/PartitionerReadingLists.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab9/src/main/java/com/example/lab9/PartitionerReadingLists.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab9/src/main/java/com/example/lab9/entities/Genre.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab9/src/main/java/com/example/lab9/entities/Genre.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab9/src/main/java/com/example/lab9/entities/ReadingList.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab9/src/main/java/com/example/lab9/entities/ReadingList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab9/src/main/java/com/example/lab9/factories/AbstractFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab9/src/main/java/com/example/lab9/factories/AbstractFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab9/src/main/java/com/example/lab9/factories/JDBCFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab9/src/main/java/com/example/lab9/factories/JDBCFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab9/src/main/java/com/example/lab9/factories/JPAFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../lab9/src/main/java/com/example/lab9/factories/JPAFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab9/src/main/resources/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../lab9/src/main/resources/app.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab9/src/main/resources/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../lab9/src/main/resources/log4j.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lab9dorian.zip" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2gtztczeYkpJyU9vdGpGA63rWI2" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.DemoApplication.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/IdeaProjects/GavrilStefan-Dorian_PA_2024/Lab11/Lab11",
+    "project.structure.last.edited": "Problems",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.45747125"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Lab11" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Lab11" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="Lab11" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <module name="Lab11" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4" />
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="90742829-d25d-49c3-acaf-a57a4100edc8" name="Changes" comment="" />
+      <created>1716531877742</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1716531877742</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Lab11">
+      <option name="closed" value="true" />
+      <created>1716533635112</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1716533635112</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Lab11">
+      <option name="closed" value="true" />
+      <created>1716534154487</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1716534154487</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Lab11" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lab11" />
+  </component>
+</project>
