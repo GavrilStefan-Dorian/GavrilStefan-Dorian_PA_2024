@@ -17,10 +17,10 @@
 <body>
 <div>
     <span th:text="'Hello, ' + ${user}"></span>
-    <p class="product-id">The ID is </p>
-    <p class="product-name">The name is </p>
+    <p class="author-id">The ID is </p>
+    <p class="author-name">The name is </p>
 
-    <form action="http://localhost:8080/products" method="POST">
+    <form action="http://localhost:8080/authors" method="POST">
         <span th:text="'Create author (params: name)'"></span>
         Author: <label><input type="text" name="name"/></label> <br/>
         <input type="submit" value="Submit"/>
