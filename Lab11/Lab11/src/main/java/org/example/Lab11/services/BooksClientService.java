@@ -1,25 +1,15 @@
 package org.example.Lab11.services;
 
-import org.example.Lab11.entities.Book;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Flux;
 
-import java.util.List;
 
 @RestController
 
 public class BooksClientService {
     final Logger log = LoggerFactory.getLogger(BooksClientService.class);
-    final String uri = "http://localhost:8081/books";
+    final String uri = "https://localhost:443/books";
 
 
 //    @GetMapping(value = "/call")

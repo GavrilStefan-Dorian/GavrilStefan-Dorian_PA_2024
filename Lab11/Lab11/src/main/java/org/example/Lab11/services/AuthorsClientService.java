@@ -19,7 +19,7 @@ import java.util.List;
 
 public class AuthorsClientService {
     final Logger log = LoggerFactory.getLogger(AuthorsClientService.class);
-    final String uri = "http://localhost:8081/authors";
+    final String uri = "https://localhost:443/authors";
 
     @GetMapping(value = "/call")
     public List<Author> getAuthors() {

@@ -11,7 +11,7 @@
 
                 $.ajax({
                     type: 'GET',
-                    url: "http://localhost:8080/authors/" + id,
+                    url: "https://localhost:443/authors/" + id,
                     success: function(response) {
                         $('.get-result').empty();
                         $('.get-result').append("Retrieved author: " + JSON.stringify(response));
@@ -28,7 +28,7 @@
                 event.preventDefault();
                 $.ajax({
                     type: 'GET',
-                    url: "http://localhost:8080/authors",
+                    url: "https://localhost:443/authors",
                     success: function(response) {
                         $('.get-all-result').empty();
                         $('.get-all-result').append("Retrieved authors: " + JSON.stringify(response));
@@ -45,7 +45,7 @@
                 event.preventDefault();
                 $.ajax({
                     type: 'GET',
-                    url: "http://localhost:8080/authors/count",
+                    url: "https://localhost:443/authors/count",
                     success: function(response) {
                         $('.get-count-result').empty();
                         $('.get-count-result').append("Retrieved authors count: " + JSON.stringify(response));
@@ -63,7 +63,7 @@
                 var formData = $(this).serialize();
                 $.ajax({
                     type: 'POST',
-                    url: "http://localhost:8080/authors",
+                    url: "https://localhost:443/authors",
                     data: formData,
                     success: function(response) {
                         $('.post-result').empty();
@@ -83,7 +83,7 @@
                 var name = $('#putForm input[name=name]').val();
                 $.ajax({
                     type: 'PUT',
-                    url: "http://localhost:8080/authors/" + id + "?name=" + name,
+                    url: "https://localhost:443/authors/" + id + "?name=" + name,
                     success: function(response) {
                         $('.put-result').empty();
                         $('.put-result').append("Updated author with ID: " + response);
@@ -101,7 +101,7 @@
                 var id = $('#deleteForm input[name=id]').val();
                 $.ajax({
                     type: 'DELETE',
-                    url: "http://localhost:8080/authors/" + id,
+                    url: "https://localhost:443/authors/" + id,
                     success: function(response) {
                         $('.delete-result').empty();
                         $('.delete-result').append("Removed author with ID: " + response);
@@ -120,7 +120,7 @@
 
                 $.ajax({
                     type: 'GET',
-                    url: "http://localhost:8080/books/" + id,
+                    url: "https://localhost:443/books/" + id,
                     success: function(response) {
                         $('.get-book-result').empty();
                         $('.get-book-result').append("Retrieved book: " + JSON.stringify(response));
@@ -137,7 +137,7 @@
                 event.preventDefault();
                 $.ajax({
                     type: 'GET',
-                    url: "http://localhost:8080/books",
+                    url: "https://localhost:443/books",
                     success: function(response) {
                         $('.get-all-books-result').empty();
                         $('.get-all-books-result').append("Retrieved books: " + JSON.stringify(response));
@@ -154,7 +154,7 @@
                 event.preventDefault();
                 $.ajax({
                     type: 'GET',
-                    url: "http://localhost:8080/books/count",
+                    url: "https://localhost:443/books/count",
                     success: function(response) {
                         $('.get-book-count-result').empty();
                         $('.get-book-count-result').append("Retrieved books count: " + JSON.stringify(response));
@@ -172,7 +172,7 @@
                 var formData = $(this).serialize();
                 $.ajax({
                     type: 'POST',
-                    url: "http://localhost:8080/books",
+                    url: "https://localhost:443/books",
                     data: formData,
                     success: function(response) {
                         $('.post-book-result').empty();
@@ -199,7 +199,7 @@
 
                 $.ajax({
                     type: 'PUT',
-                    url: "http://localhost:8080/books/" + id,
+                    url: "https://localhost:443/books/" + id,
                     contentType: "application/json",
                     data: JSON.stringify(bookData),
                     success: function(response) {
@@ -220,7 +220,7 @@
                 var id = $('#deleteBookForm input[name=id]').val();
                 $.ajax({
                     type: 'DELETE',
-                    url: "http://localhost:8080/books/" + id,
+                    url: "https://localhost:443/books/" + id,
                     success: function(response) {
                         $('.delete-book-result').empty();
                         $('.delete-book-result').append(response);
