@@ -13,7 +13,7 @@ public class Database {
     private static final String URL = "jdbc:postgresql://localhost:5432/Books_Lab8Java";
     // JDBC
     private static final String USER = "postgres";
-    private static final String PASSWORD = "postgres";
+    private static final String PASSWORD = "1234";
     private Database() {
     }
 
