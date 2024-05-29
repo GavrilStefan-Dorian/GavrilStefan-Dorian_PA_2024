@@ -1,5 +1,6 @@
 package org.example.Lab11.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,9 +14,11 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
+    @JsonProperty("id")
     private int id;
 
     @Column(name="name", unique = true)
+    @JsonProperty("name")
     private String name;
 
     public Author(int authorId, String authorName) {

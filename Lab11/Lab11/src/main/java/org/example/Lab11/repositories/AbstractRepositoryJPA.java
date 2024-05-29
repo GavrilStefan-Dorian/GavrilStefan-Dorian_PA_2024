@@ -1,5 +1,7 @@
  package org.example.Lab11.repositories;
 
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.example.Lab11.Database;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -54,6 +56,17 @@ public abstract class AbstractRepositoryJPA<T, ID extends Serializable> implemen
             rollback();
         }
     }
+    @Override
+    public void update(T entity) {
+        try {
+            beginTransaction();
+            entityManager.merge(entity);
+            commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            rollback();
+        }
+    }
 
     @Override
     public T findById(ID id) {
@@ -74,6 +87,6 @@ public abstract class AbstractRepositoryJPA<T, ID extends Serializable> implemen
 
     @Override
     public List<T> findAll() {
-        return entityManager.createQuery("FROM " + getEntityClass().getName(), getEntityClass()).getResultList();
+        return entityManager.createQuery("SELECT e FROM " + getEntityClass().getName() + " e", getEntityClass()).getResultList();
     }
 }

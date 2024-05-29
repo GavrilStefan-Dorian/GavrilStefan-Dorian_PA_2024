@@ -1,7 +1,9 @@
 package org.example.Lab11.repositories;
 
 import org.example.Lab11.entities.Genre;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class GenreRepositoryJPA extends AbstractRepositoryJPA<Genre, Integer>{
 
     @Override

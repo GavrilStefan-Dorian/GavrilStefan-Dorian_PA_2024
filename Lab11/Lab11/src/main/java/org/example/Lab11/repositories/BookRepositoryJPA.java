@@ -1,7 +1,9 @@
 package org.example.Lab11.repositories;
 
 import org.example.Lab11.entities.Book;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class BookRepositoryJPA extends AbstractRepositoryJPA<Book, Integer> {
     @Override
     protected Class<Book> getEntityClass() {

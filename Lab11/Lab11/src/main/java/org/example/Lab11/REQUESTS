@@ -1,0 +1,2 @@
+POST http://localhost:8080/authors?name=Dorian
+PUT http://localhost:8080/authors/1388?name=Gavril Stefan

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+         $.ajax({
+         url: "http://localhost:8080/authors/1"
+         }).then(function(author) {
+         $('.author-id').append(author.id);
+         $('.author-name').append(author.name);
+         });
+        });
+    </script>
+    <title>Demo</title>
+</head>
+<body>
+<div>
+    <span th:text="'Hello, ' + ${user}"></span>
+    <p class="product-id">The ID is </p>
+    <p class="product-name">The name is </p>
+
+    <form action="http://localhost:8080/products" method="POST">
+        <span th:text="'Create author (params: name)'"></span>
+        Author: <label><input type="text" name="name"/></label> <br/>
+        <input type="submit" value="Submit"/>
+    </form>
+</div>
+</bodY>
+</html>
