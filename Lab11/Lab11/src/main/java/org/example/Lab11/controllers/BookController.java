@@ -33,10 +33,6 @@ public class BookController {
         return bookRepo.findById(id);
     }
 
-    @GetMapping("/{title}")
-    public Book getBookByTitle(@PathVariable("title") String title){
-        return bookRepo.findByName(title);
-    }
 
     @PostMapping
     public ResponseEntity<String> createBook(@RequestParam String title){
