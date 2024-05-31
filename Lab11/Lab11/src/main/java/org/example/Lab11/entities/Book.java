@@ -29,9 +29,9 @@ public class Book {
     @Column(name="publication_date")
     private Date publicationDate;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinTable(
-            name = "book_authors",
+            name = "bookauthors",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
     private List<Author> authors;
@@ -40,7 +40,7 @@ public class Book {
     private String language;
 
     @JoinColumn(name="genre_id")
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private Genre genre;
 
     public Book() {

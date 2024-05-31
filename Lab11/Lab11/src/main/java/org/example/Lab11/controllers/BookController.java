@@ -3,6 +3,8 @@ package org.example.Lab11.controllers;
 import org.example.Lab11.entities.Author;
 import org.example.Lab11.entities.Book;
 import org.example.Lab11.services.BooksClientService;
+import org.graph4j.Digraph;
+import org.graph4j.GraphBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,11 +21,11 @@ public class BookController {
 
     @Autowired
     private BooksClientService booksService;
-//    @GetMapping("/sequence")
-//    public Flux<Book> getLongestSequence(){
-//        Random random = new Random();
-//        Digraph g = Graph
-//    }
+    @PreAuthorize("hasRole('client')")
+    @GetMapping("/sequence")
+    public Flux<Book> getLongestSequence(){
+        return booksService.getLongestSequence();
+    }
 
     @GetMapping
     public Flux<Book> getBooks() {

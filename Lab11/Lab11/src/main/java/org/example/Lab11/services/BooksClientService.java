@@ -6,6 +6,9 @@ import org.example.Lab11.entities.Genre;
 import org.example.Lab11.repositories.AuthorRepositoryJPA;
 import org.example.Lab11.repositories.BookRepositoryJPA;
 import org.example.Lab11.repositories.GenreRepositoryJPA;
+import org.graph4j.Digraph;
+import org.graph4j.Edge;
+import org.graph4j.GraphBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +17,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.IntStream;
 
 @Service
 public class BooksClientService {
@@ -31,6 +33,47 @@ public class BooksClientService {
 
     @Autowired
     private AuthorRepositoryJPA authorRepository;
+
+    public Flux<Book> getLongestSequence() {
+        Random random = new Random();
+        Digraph g = GraphBuilder.empty().buildDigraph();
+
+        List<Book> books = bookRepository.findAll();
+        int size = books.size();
+
+        IntStream.range(0, size).forEach(g::addVertex);
+
+        IntStream.range(0, size).forEach(i ->
+                IntStream.range(i + 1, size).forEach(j -> {
+                    if (random.nextBoolean())
+                        g.addEdge(i, j);
+                    else
+                        g.addEdge(j, i);
+                }));
+
+        List<List<Book>> dp = new ArrayList<>(Collections.nCopies(size, new ArrayList<>()));
+
+        for (int vertex : g.vertices()) {
+            Edge[] outgoingEdges = g.outgoingEdgesFrom(vertex);
+            for (var edge : outgoingEdges) {
+                Book sourceBook = books.get(edge.source());
+                Book targetBook = books.get(edge.target());
+                if (sourceBook.getPublicationDate().before(targetBook.getPublicationDate())) {
+                    if (dp.get(edge.target()).size() < dp.get(vertex).size() + 1) {
+                        dp.set(edge.target(), new ArrayList<>(dp.get(vertex)));
+                        dp.get(edge.target()).add(books.get(vertex));
+                    }
+                }
+            }
+        }
+
+        List<Book> longestSequence = dp.stream()
+                .max(Comparator.comparingInt(List::size))
+                .orElse(new ArrayList<>());
+
+        return Flux.fromIterable(longestSequence);
+    }
+
 
     public Flux<Book> getAllBooks() {
         log.info("Fetching all books asynchronously");
