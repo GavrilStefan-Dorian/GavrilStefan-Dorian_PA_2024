@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Optional;
+
 @Service
 public class AuthorsClientService {
 
@@ -36,31 +38,36 @@ public class AuthorsClientService {
     public Mono<ResponseEntity<String>> createAuthor(String name) {
         log.info("Creating author {} asynchronously", name);
         Author author = new Author(name);
-        authorRepository.create(author);
+        authorRepository.save(author);
         return Mono.just(ResponseEntity.ok("Author created successfully"));
     }
 
     public Mono<ResponseEntity<String>> updateAuthor(int id, String name) {
         log.info("Updating author with id {}: new name - {} asynchronously", id, name);
-        Author author = authorRepository.findById(id);
-        if (author == null) {
+        Optional<Author> author = authorRepository.findById(id);
+        if (author.isEmpty()) {
             return Mono.just(ResponseEntity.notFound().build());
         }
-        author.setName(name);
-        authorRepository.update(author);
+        author.get().setName(name);
+        authorRepository.save(author.get());
         return Mono.just(ResponseEntity.ok("Author updated successfully"));
     }
 
     public Mono<ResponseEntity<String>> deleteAuthor(int id) {
         log.info("Deleting author with id {} asynchronously", id);
-        Author author = authorRepository.findById(id);
-        if (author == null) {
+        Optional<Author> author = authorRepository.findById(id);
+        if (author.isEmpty()) {
             return Mono.just(ResponseEntity.notFound().build());
         }
-        authorRepository.delete(id);
+        authorRepository.delete(author.get());
         return Mono.just(ResponseEntity.ok("Author deleted successfully"));
     }
 }
+
+
+
+
+
 
 
 //

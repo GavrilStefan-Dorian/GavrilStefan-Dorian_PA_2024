@@ -16,6 +16,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BooksClientService {
@@ -27,6 +28,7 @@ public class BooksClientService {
 
     @Autowired
     private GenreRepositoryJPA genreRepository;
+
     @Autowired
     private AuthorRepositoryJPA authorRepository;
 
@@ -49,42 +51,37 @@ public class BooksClientService {
         log.info("Creating book {} asynchronously", title);
         Book book = new Book();
         book.setTitle(title);
-        bookRepository.create(book);
+        bookRepository.save(book);
         return Mono.just(ResponseEntity.ok("Book created successfully"));
     }
 
     public Mono<ResponseEntity<String>> createBook(Book book) {
         log.info("Creating book {} asynchronously", book);
-        bookRepository.create(book);
+        bookRepository.save(book);
         return Mono.just(ResponseEntity.ok("Book created successfully"));
     }
 
     public Mono<ResponseEntity<String>> updateBook(int id, Book updatedBook) {
         log.info("Updating book with id {}: new details - {} asynchronously", id, updatedBook);
-        Book existingBook = bookRepository.findById(id);
-        if (existingBook == null) {
+        Optional<Book> existingBook = bookRepository.findById(id);
+        if (existingBook.isEmpty()) {
             return Mono.just(ResponseEntity.notFound().build());
         }
 
-        // Check if the genre of the updated book exists in the database
-        Genre existingGenre = genreRepository.findByName(updatedBook.getGenreName().getName());
+        Genre existingGenre = genreRepository.findByName(updatedBook.getGenre().getName());
         if (existingGenre == null) {
-            // If the genre doesn't exist, create it
-            Genre newGenre = new Genre(updatedBook.getGenreName().getName());
-            genreRepository.create(newGenre);
-            updatedBook.setGenreName(newGenre);
+            Genre newGenre = new Genre(updatedBook.getGenre().getName());
+            genreRepository.save(newGenre);
+            updatedBook.setGenre(newGenre);
         } else {
-            // If the genre exists, set it in the updated book
-            updatedBook.setGenreName(existingGenre);
+            updatedBook.setGenre(existingGenre);
         }
 
-        // Check and save any new authors associated with the book
         List<Author> updatedAuthors = new ArrayList<>();
         for (Author author : updatedBook.getAuthors()) {
             Author existingAuthor = authorRepository.findByName(author.getName());
             if (existingAuthor == null) {
-                // If the author doesn't exist, create it
-                authorRepository.create(author);
+                authorRepository.save(author);
                 updatedAuthors.add(author);
             } else {
                 updatedAuthors.add(existingAuthor);
@@ -92,26 +89,23 @@ public class BooksClientService {
         }
         updatedBook.setAuthors(updatedAuthors);
 
-        // Update the existing book with the updated details
-        existingBook.setTitle(updatedBook.getTitle());
-        existingBook.setLanguage(updatedBook.getLanguage());
-        existingBook.setAuthors(updatedBook.getAuthors());
-        existingBook.setNumberOfPages(updatedBook.getNumberOfPages());
-        existingBook.setPublicationDate(updatedBook.getPublicationDate());
+        existingBook.get().setTitle(updatedBook.getTitle());
+        existingBook.get().setLanguage(updatedBook.getLanguage());
+        existingBook.get().setAuthors(updatedBook.getAuthors());
+        existingBook.get().setNumberOfPages(updatedBook.getNumberOfPages());
+        existingBook.get().setPublicationDate(updatedBook.getPublicationDate());
 
-        bookRepository.update(existingBook);
+        bookRepository.save(existingBook.get());
         return Mono.just(ResponseEntity.ok("Book updated successfully"));
     }
 
-
-
     public Mono<ResponseEntity<String>> deleteBook(int id) {
         log.info("Deleting book with id {} asynchronously", id);
-        Book book = bookRepository.findById(id);
-        if (book == null) {
+        Optional<Book> book = bookRepository.findById(id);
+        if (book.isEmpty()) {
             return Mono.just(ResponseEntity.notFound().build());
         }
-        bookRepository.delete(id);
+        bookRepository.delete(book.get());
         return Mono.just(ResponseEntity.ok("Book deleted successfully"));
     }
 }

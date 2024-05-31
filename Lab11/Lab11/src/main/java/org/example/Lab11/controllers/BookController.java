@@ -5,11 +5,13 @@ import org.example.Lab11.entities.Book;
 import org.example.Lab11.services.BooksClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.Random;
 
 @RestController
 @RequestMapping("/books")
@@ -17,6 +19,11 @@ public class BookController {
 
     @Autowired
     private BooksClientService booksService;
+//    @GetMapping("/sequence")
+//    public Flux<Book> getLongestSequence(){
+//        Random random = new Random();
+//        Digraph g = Graph
+//    }
 
     @GetMapping
     public Flux<Book> getBooks() {

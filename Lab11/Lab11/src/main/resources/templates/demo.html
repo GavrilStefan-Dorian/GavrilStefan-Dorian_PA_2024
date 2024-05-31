@@ -4,24 +4,57 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
+            function getJwtToken() {
+                return localStorage.getItem("jwtToken");
+            }
+
+            function setJwtToken(token) {
+                localStorage.setItem("jwtToken", token);
+            }
+
+            function ajaxRequest(type, url, data, successCallback, errorCallback) {
+                $.ajax({
+                    type: type,
+                    url: url,
+                    data: data,
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader("Authorization", "Bearer " + getJwtToken());
+                    },
+                    success: successCallback,
+                    error: errorCallback
+                });
+            }
+
             // GET author by ID
             $('#getForm').submit(function(event) {
                 event.preventDefault();
                 var id = $('#getForm input[name=id]').val();
-
-                $.ajax({
-                    type: 'GET',
-                    url: "https://localhost:443/authors/" + id,
-                    success: function(response) {
-                        $('.get-result').empty();
-                        $('.get-result').append("Retrieved author: " + JSON.stringify(response));
-                    },
-                    error: function() {
+                ajaxRequest('GET', "https://localhost:443/authors/" + id, null,
+                    function(response) {
+                            $('.get-result').empty();
+                            $('.get-result').append("Retrieved author: " + JSON.stringify(response));
+                        },
+                         function() {
                         $('.get-result').empty();
                         $('.get-result').append("Error retrieving author.");
                     }
-                });
+                );
             });
+
+
+<!--                $.ajax({-->
+<!--                    type: 'GET',-->
+<!--                    url: "https://localhost:443/authors/" + id,-->
+<!--                    success: function(response) {-->
+<!--                        $('.get-result').empty();-->
+<!--                        $('.get-result').append("Retrieved author: " + JSON.stringify(response));-->
+<!--                    },-->
+<!--                    error: function() {-->
+<!--                        $('.get-result').empty();-->
+<!--                        $('.get-result').append("Error retrieving author.");-->
+<!--                    }-->
+<!--                });-->
+<!--            });-->
 
             // GET all authors
             $('#getAllForm').submit(function(event) {
