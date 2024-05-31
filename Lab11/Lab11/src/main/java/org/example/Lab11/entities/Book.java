@@ -7,10 +7,10 @@ import java.util.List;
 
 @Entity
 @Table(name="books", schema="public")
-@NamedQueries({
-        @NamedQuery(name = "Book.findById", query = "SELECT b FROM Book b WHERE b.id = :myId"),
-        @NamedQuery(name = "Book.findByTitle", query = "SELECT b FROM Book b WHERE b.title LIKE CONCAT('%', :myName,'%')")
-})
+//@NamedQueries({
+//        @NamedQuery(name = "Book.findById", query = "SELECT b FROM Book b WHERE b.id = :myId"),
+//        @NamedQuery(name = "Book.findByTitle", query = "SELECT b FROM Book b WHERE b.title LIKE CONCAT('%', :myName,'%')")
+//})
 public class Book {
 
     @Id
@@ -29,7 +29,7 @@ public class Book {
     @Column(name="publication_date")
     private Date publicationDate;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinTable(
             name = "bookauthors",
             joinColumns = @JoinColumn(name = "book_id"),
@@ -40,7 +40,7 @@ public class Book {
     private String language;
 
     @JoinColumn(name="genre_id")
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Genre genre;
 
     public Book() {

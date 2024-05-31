@@ -51,7 +51,7 @@ public class BooksClientService {
                         g.addEdge(j, i);
                 }));
 
-        List<List<Book>> dp = new ArrayList<>(Collections.nCopies(size, new ArrayList<>()));
+        List<List<Book>> sequences = new ArrayList<>(Collections.nCopies(size, new ArrayList<>()));
 
         for (int vertex : g.vertices()) {
             Edge[] outgoingEdges = g.outgoingEdgesFrom(vertex);
@@ -59,15 +59,15 @@ public class BooksClientService {
                 Book sourceBook = books.get(edge.source());
                 Book targetBook = books.get(edge.target());
                 if (sourceBook.getPublicationDate().before(targetBook.getPublicationDate())) {
-                    if (dp.get(edge.target()).size() < dp.get(vertex).size() + 1) {
-                        dp.set(edge.target(), new ArrayList<>(dp.get(vertex)));
-                        dp.get(edge.target()).add(books.get(vertex));
+                    if (sequences.get(edge.target()).size() < sequences.get(vertex).size() + 1) {
+                        sequences.set(edge.target(), new ArrayList<>(sequences.get(vertex)));
+                        sequences.get(edge.target()).add(books.get(vertex));
                     }
                 }
             }
         }
 
-        List<Book> longestSequence = dp.stream()
+        List<Book> longestSequence = sequences.stream()
                 .max(Comparator.comparingInt(List::size))
                 .orElse(new ArrayList<>());
 

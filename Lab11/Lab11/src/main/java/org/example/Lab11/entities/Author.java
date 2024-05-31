@@ -5,10 +5,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name="authors", schema ="public")
-@NamedQueries({
-        @NamedQuery(name = "Author.findById", query = "SELECT a FROM Author a WHERE a.id = :myId"),
-        @NamedQuery(name = "Author.findByName", query = "SELECT a FROM Author a WHERE a.name LIKE CONCAT('%', :myName,'%')")
-})
+//@NamedQueries({
+//        @NamedQuery(name = "Author.findById", query = "SELECT a FROM Author a WHERE a.id = :myId"),
+//        @NamedQuery(name = "Author.findByName", query = "SELECT a FROM Author a WHERE a.name LIKE CONCAT('%', :myName,'%')")
+//})
 public class Author {
 
     @Id
