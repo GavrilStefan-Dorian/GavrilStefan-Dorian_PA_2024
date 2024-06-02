@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            function getJwtToken() {
+                return localStorage.getItem("jwtToken");
+            }
+
+<!--            function setJwtToken(token) {-->
+<!--                localStorage.setItem("jwtToken", token);-->
+<!--            }-->
+
+            if(!getJwtToken()) {
+                window.location.href="https://localhost:443/account/login";
+            }
+
+            function ajaxRequest(type, url, data, successCallback, errorCallback) {
+                var authToken = getJwtToken();
+                console.log("JWT Token:", authToken);
+
+                $.ajax({
+                    type: type,
+                    url: url,
+                    data: data,
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader("Authorization", "Bearer " + getJwtToken());
+                    },
+                    success: successCallback,
+                    error: errorCallback
+                });
+            }
+
+            // GET author by ID
+            $('#getForm').submit(function(event) {
+                event.preventDefault();
+                var id = $('#getForm input[name=id]').val();
+                ajaxRequest('GET', "https://localhost:443/authors/" + id, null,
+                    function(response) {
+                        $('.get-result').empty();
+                        $('.get-result').append("Retrieved author: " + JSON.stringify(response));
+                    },
+                    function() {
+                        $('.get-result').empty();
+                        $('.get-result').append("Error retrieving author.");
+                    }
+                );
+            });
+
+            // GET all authors
+            $('#getAllForm').submit(function(event) {
+                event.preventDefault();
+                ajaxRequest('GET', "https://localhost:443/authors", null,
+                    function(response) {
+                        $('.get-all-result').empty();
+                        $('.get-all-result').append("Retrieved authors: " + JSON.stringify(response));
+                    },
+                    function() {
+                        $('.get-all-result').empty();
+                        $('.get-all-result').append("Error retrieving authors.");
+                    }
+                );
+            });
+
+            // GET author count
+            $('#getCountForm').submit(function(event) {
+                event.preventDefault();
+                ajaxRequest('GET', "https://localhost:443/authors/count", null,
+                    function(response) {
+                        $('.get-count-result').empty();
+                        $('.get-count-result').append("Retrieved authors count: " + JSON.stringify(response));
+                    },
+                    function() {
+                        $('.get-count-result').empty();
+                        $('.get-count-result').append("Error retrieving authors count.");
+                    }
+                );
+            });
+
+            // POST author
+            $('#postForm').submit(function(event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                ajaxRequest('POST', "https://localhost:443/authors", formData,
+                    function(response) {
+                        $('.post-result').empty();
+                        $('.post-result').append("New author ID: " + response);
+                    },
+                    function() {
+                        $('.post-result').empty();
+                        $('.post-result').append("Error creating author.");
+                    }
+                );
+            });
+
+            // PUT author
+            $('#putForm').submit(function(event) {
+                event.preventDefault();
+                var id = $('#putForm input[name=id]').val();
+                var name = $('#putForm input[name=name]').val();
+                ajaxRequest('PUT', "https://localhost:443/authors/" + id + "?name=" + name, null,
+                    function(response) {
+                        $('.put-result').empty();
+                        $('.put-result').append("Updated author with ID: " + response);
+                    },
+                    function() {
+                        $('.put-result').empty();
+                        $('.put-result').append("Error updating author.");
+                    }
+                );
+            });
+
+            // DELETE author
+            $('#deleteForm').submit(function(event) {
+                event.preventDefault();
+                var id = $('#deleteForm input[name=id]').val();
+                ajaxRequest('DELETE', "https://localhost:443/authors/" + id, null,
+                    function(response) {
+                        $('.delete-result').empty();
+                        $('.delete-result').append("Removed author with ID: " + response);
+                    },
+                    function() {
+                        $('.delete-result').empty();
+                        $('.delete-result').append("Error removing author.");
+                    }
+                );
+            });
+
+            // GET book by ID
+            $('#getBookForm').submit(function(event) {
+                event.preventDefault();
+                var id = $('#getBookForm input[name=id]').val();
+                ajaxRequest('GET', "https://localhost:443/books/" + id, null,
+                    function(response) {
+                        $('.get-book-result').empty();
+                        $('.get-book-result').append("Retrieved book: " + JSON.stringify(response));
+                    },
+                    function() {
+                        $('.get-book-result').empty();
+                        $('.get-book-result').append("Error retrieving book.");
+                    }
+                );
+            });
+
+            // GET all books
+            $('#getAllBooksForm').submit(function(event) {
+                event.preventDefault();
+                ajaxRequest('GET', "https://localhost:443/books", null,
+                    function(response) {
+                        $('.get-all-books-result').empty();
+                        $('.get-all-books-result').append("Retrieved books: " + JSON.stringify(response));
+                    },
+                    function() {
+                        $('.get-all-books-result').empty();
+                        $('.get-all-books-result').append("Error retrieving books.");
+                    }
+                );
+            });
+
+            // GET book count
+            $('#getBookCountForm').submit(function(event) {
+                event.preventDefault();
+                ajaxRequest('GET', "https://localhost:443/books/count", null,
+                    function(response) {
+                        $('.get-book-count-result').empty();
+                        $('.get-book-count-result').append("Retrieved books count: " + JSON.stringify(response));
+                    },
+                    function() {
+                        $('.get-book-count-result').empty();
+                        $('.get-book-count-result').append("Error retrieving books count.");
+                    }
+                );
+            });
+
+            // POST book
+            $('#postBookForm').submit(function(event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                ajaxRequest('POST', "https://localhost:443/books", formData,
+                    function(response) {
+                        $('.post-book-result').empty();
+                        $('.post-book-result').append(response);
+                    },
+                    function() {
+                        $('.post-book-result').empty();
+                        $('.post-book-result').append("Error creating book.");
+                    }
+                );
+            });
+
+            // PUT book
+            $('#putBookForm').submit(function(event) {
+                event.preventDefault();
+                var id = $('#putBookForm input[name=id]').val();
+                var bookData = {
+                    title: $('#putBookForm input[name=title]').val(),
+                    language: $('#putBookForm input[name=language]').val(),
+                    authors: $('#putBookForm input[name=authors]').val().split(',').map(author => ({ name: author.trim() })), // Example of converting comma-separated author names to an array of author objects
+                    genreName: $('#putBookForm input[name=genre]').val(),
+                    numberOfPages: $('#putBookForm input[name=pages]').val(),
+                    publicationDate: $('#putBookForm input[name=publicationDate]').val()
+                };
+
+                ajaxRequest('PUT', "https://localhost:443/books/" + id, JSON.stringify(bookData),
+                    function(response) {
+                        $('.put-book-result').empty();
+                        $('.put-book-result').append(response);
+                    },
+                    function() {
+                        $('.put-book-result').empty();
+                        $('.put-book-result').append("Error updating book.");
+                    }
+                     );
+                });
+
+                // DELETE book
+                $('#deleteBookForm').submit(function(event) {
+                    event.preventDefault();
+                    var id = $('#deleteBookForm input[name=id]').val();
+                    ajaxRequest('DELETE', "https://localhost:443/books/" + id, null,
+                        function(response) {
+                            $('.delete-book-result').empty();
+                            $('.delete-book-result').append(response);
+                        },
+                        function() {
+                            $('.delete-book-result').empty();
+                            $('.delete-book-result').append("Error removing book.");
+                        }
+                    );
+                });
+            });
+    </script>
+    <title>Demo</title>
+</head>
+<body>
+<div>
+    <form id="getForm">
+        <span th:text="'Get author (params: id): '"></span>
+        <label><input type="number" name="id"/></label> <br/>
+        <input type="submit" value="Get"/>
+    </form>
+    <p class="get-result"></p>
+
+    <form id="getAllForm">
+        <span>Get all authors</span> <br/>
+        <input type="submit" value="Get All"/>
+    </form>
+    <p class="get-all-result"></p>
+
+    <form id="getCountForm">
+        <span>Get author count</span> <br/>
+        <input type="submit" value="Get Count"/>
+    </form>
+    <p class="get-count-result"></p>
+
+    <form id="postForm">
+        <span th:text="'Create author (params: name): '"></span>
+        <label><input type="text" name="name"/></label> <br/>
+        <input type="submit" value="Submit"/>
+    </form>
+    <p class="post-result"></p>
+
+    <form id="putForm">
+        <span th:text="'Update author (params: id, name): '"></span>
+        <label>ID: <input type="number" name="id"/></label>
+        <label>Name: <input type="text" name="name"/></label> <br/>
+        <input type="submit" value="Update"/>
+    </form>
+    <p class="put-result"></p>
+
+    <form id="deleteForm">
+        <span th:text="'Remove author (params: id): '"></span>
+        <label><input type="number" name="id"/></label> <br/>
+        <input type="submit" value="Remove"/>
+    </form>
+    <p class="delete-result"></p>
+
+    <hr/>
+
+    <form id="getBookForm">
+        <span>Get book (params: id): </span>
+        <label><input type="number" name="id"/></label> <br/>
+        <input type="submit" value="Get Book"/>
+    </form>
+    <p class="get-book-result"></p>
+
+    <form id="getAllBooksForm">
+        <span>Get all books</span> <br/>
+        <input type="submit" value="Get All Books"/>
+    </form>
+    <p class="get-all-books-result"></p>
+
+    <form id="getBookCountForm">
+        <span>Get book count</span> <br/>
+        <input type="submit" value="Get Book Count"/>
+    </form>
+    <p class="get-book-count-result"></p>
+
+    <form id="postBookForm">
+        <span>Create book (params: title): </span>
+        <label><input type="text" name="title"/></label> <br/>
+        <input type="submit" value="Create Book"/>
+    </form>
+    <p class="post-book-result"></p>
+
+    <form id="putBookForm">
+        <span>Update book (params: id, title, language, authors, genre, pages, publicationDate): </span>
+        <label>ID: <input type="number" name="id"/></label>
+        <label>Title: <input type="text" name="title"/></label> <br/>
+        <label>Language: <input type="text" name="language"/></label> <br/>
+        <label>Authors: <input type="text" name="authors"/></label> <br/>
+        <label>Genre: <input type="text" name="genre"/></label> <br/>
+        <label>Pages: <input type="number" name="pages"/></label> <br/>
+        <label>Publication Date: <input type="date" name="publicationDate"/></label> <br/>
+        <input type="submit" value="Update Book"/>
+    </form>
+    <p class="put-book-result"></p>
+
+    <form id="deleteBookForm">
+        <span>Remove book (params: id): </span>
+        <label><input type="number" name="id"/></label> <br/>
+        <input type="submit" value="Remove Book"/>
+    </form>
+    <p class="delete-book-result"></p>
+</div>
+</body>
+</html>
+
+
+
+
+
