@@ -1,8 +1,6 @@
 package org.example;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.net.MalformedURLException;
@@ -11,8 +9,6 @@ import java.net.URLClassLoader;
 import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
-
-import org.junit.Test;
 
 public class ClassAnalyzer {
 
@@ -121,16 +117,31 @@ public class ClassAnalyzer {
 
     private static void invokeTestMethods(Class<?> cls) {
         Method[] methods = cls.getDeclaredMethods();
+        System.out.println(Arrays.toString(methods));
         int invokedTests = 0;
         int totalTests = 0;
+        Random random = new Random();
 
         for (Method method : methods) {
             if (method.isAnnotationPresent(Test.class)) {
                 totalTests++;
                 try {
-                    if (Modifier.isPublic(method.getModifiers()) && !Modifier.isStatic(method.getModifiers()) && method.getParameterCount() == 0) {
-                        System.out.println("Invocand metoda @Test: " + method.getName());
-                        method.invoke(cls.getDeclaredConstructor().newInstance());
+                    if (Modifier.isPublic(method.getModifiers())) {
+                            System.out.println("Invocand metoda @Test cu " + method.getParameterCount() + " parametrii: " + method.getName());
+                        if(method.getParameterCount() == 0)
+                            method.invoke(cls.getDeclaredConstructor().newInstance());
+                        else {
+                            Object[] args = new Object[method.getParameterCount()];
+                            int count = 0;
+                            for(Class<?> type : method.getParameterTypes()){
+//                                System.out.println(type.getSimpleName());
+                                if(type.getSimpleName().equals("int"))
+                                    args[count++] = random.nextInt(50);
+                                if(type.getSimpleName().equals("String"))
+                                    args[count++] = "a string";
+                            }
+                            method.invoke(cls.getDeclaredConstructor().newInstance(), args);
+                        }
                         invokedTests++;
                     }
                 } catch (Exception e) {
@@ -142,15 +153,10 @@ public class ClassAnalyzer {
         System.out.println("Total metode @Test: " + totalTests + ", Invocate cu succes: " + invokedTests);
     }
 
-    public static void main(String[] args) {
-        if (args.length < 1) {
-            System.out.println("Te rog sa furnizezi o cale ca argument.");
-            return;
-        }
-        try {
-            analyzePath(args[0]);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+
+            BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+            String path = console.readLine();
+            analyzePath(path);
     }
 }

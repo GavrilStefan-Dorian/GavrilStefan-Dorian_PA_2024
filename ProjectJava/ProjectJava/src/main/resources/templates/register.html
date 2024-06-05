@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+<h1>Register</h1>
+<form id="registerForm">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName"><br><br>
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName"><br><br>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username"><br><br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email"><br><br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password"><br><br>
+    <input type="submit" value="Register">
+</form>
+<div id="registerMessage"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#registerForm').submit(function(event) {
+            event.preventDefault();
+            var firstName = $('#firstName').val();
+            var lastName = $('#lastName').val();
+            var username = $('#username').val();
+            var email = $('#email').val();
+            var password = $('#password').val();
+
+            $.ajax({
+                type: 'POST',
+                url: "https://localhost:443/account/register",
+                data: JSON.stringify({
+                    firstName: firstName,
+                    lastName: lastName,
+                    userName: username,
+                    email: email,
+                    password: password
+                }),
+                contentType: 'application/json',
+                success: function(response) {
+                    $('#registerMessage').text('Registration successful');
+                },
+                error: function(xhr, status, error) {
+                    $('#registerMessage').text('Registration failed');
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
