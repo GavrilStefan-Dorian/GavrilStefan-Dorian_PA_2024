@@ -1,0 +1,47 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('https://th.bing.com/th/id/R.6c369613a6b5ad3630f2321a8aa4c2c8?rik=xZMltavKV1SWUw&riu=http%3a%2f%2f2.bp.blogspot.com%2f_5a0ks-Ar6II%2fTRCvPoQl_pI%2fAAAAAAAAAA8%2f439tnHj1Ls0%2fs1600%2f5179%25255B1%25255D.jpg&ehk=twyjWhVKEetvDSqaG9qN0j4x7XRuHIWwFy8nIYJrPmI%3d&risl=&pid=ImgRaw&r=0');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 90%;
+    color: #333;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #1a1a1a;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
