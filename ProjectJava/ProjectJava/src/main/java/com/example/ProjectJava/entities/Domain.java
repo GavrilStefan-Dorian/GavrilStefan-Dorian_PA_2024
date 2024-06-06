@@ -1,25 +1,23 @@
 package com.example.ProjectJava.entities;
 
 import jakarta.persistence.*;
+
 import java.util.List;
 
 @Entity
-@Table(name="domains",schema="public")
+@Table(name="domains")
 public class Domain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long domainId;
     private String name;
 
-    @OneToMany(mappedBy = "domain")
-    private List<Question> questions;
-
-    public Long getId() {
-        return id;
+    public Long getDomainId() {
+        return domainId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setDomainId(Long domainId) {
+        this.domainId = domainId;
     }
 
     public String getName() {
@@ -29,14 +27,4 @@ public class Domain {
     public void setName(String name) {
         this.name = name;
     }
-
-    public List<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
-    }
-
-    // Constructors, getters, setters
 }

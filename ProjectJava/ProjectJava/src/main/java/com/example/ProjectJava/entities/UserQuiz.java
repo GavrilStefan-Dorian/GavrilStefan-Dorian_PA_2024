@@ -3,13 +3,12 @@ package com.example.ProjectJava.entities;
 import jakarta.persistence.*;
 
 import java.util.List;
-
 @Entity
-@Table(name="user_quizzes",schema="public")
+@Table(name="user_quizzes")
 public class UserQuiz {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long userQuizId;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -19,17 +18,14 @@ public class UserQuiz {
     @JoinColumn(name = "quiz_id")
     private Quiz quiz;
 
-    @OneToMany(mappedBy = "userQuiz")
-    private List<UserResponse> responses;
+    private Integer score;
 
-    private int score;
-
-    public Long getId() {
-        return id;
+    public Long getUserQuizId() {
+        return userQuizId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserQuizId(Long userQuizId) {
+        this.userQuizId = userQuizId;
     }
 
     public User getUser() {
@@ -48,19 +44,13 @@ public class UserQuiz {
         this.quiz = quiz;
     }
 
-    public List<UserResponse> getResponses() {
-        return responses;
-    }
-
-    public void setResponses(List<UserResponse> responses) {
-        this.responses = responses;
-    }
-
-    public int getScore() {
+    public Integer getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(Integer score) {
         this.score = score;
     }
+
+    // Getters and setters
 }

@@ -4,28 +4,35 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="quizzes",schema="public")
+@Table(name="quizzes")
 public class Quiz {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long quizId;
 
     @ManyToOne
     @JoinColumn(name = "domain_id")
     private Domain domain;
 
-    @OneToMany(mappedBy = "quiz")
-    private List<Question> questions;
+    private int noQuestions;
 
     @OneToMany(mappedBy = "quiz")
-    private List<UserQuiz> userQuizzes;
+    private List<QuizQuestion> quizQuestions;
 
-    public Long getId() {
-        return id;
+    public List<QuizQuestion> getQuizQuestions() {
+        return quizQuestions;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setQuizQuestions(List<QuizQuestion> quizQuestions) {
+        this.quizQuestions = quizQuestions;
+    }
+
+    public Long getQuizId() {
+        return quizId;
+    }
+
+    public void setQuizId(Long quizId) {
+        this.quizId = quizId;
     }
 
     public Domain getDomain() {
@@ -36,21 +43,12 @@ public class Quiz {
         this.domain = domain;
     }
 
-    public List<Question> getQuestions() {
-        return questions;
+    public int getNoQuestions() {
+        return noQuestions;
     }
 
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
+    public void setNoQuestions(int noQuestions) {
+        this.noQuestions = noQuestions;
     }
 
-    public List<UserQuiz> getUserQuizzes() {
-        return userQuizzes;
-    }
-
-    public void setUserQuizzes(List<UserQuiz> userQuizzes) {
-        this.userQuizzes = userQuizzes;
-    }
-
-    // Constructors, getters, setters
 }

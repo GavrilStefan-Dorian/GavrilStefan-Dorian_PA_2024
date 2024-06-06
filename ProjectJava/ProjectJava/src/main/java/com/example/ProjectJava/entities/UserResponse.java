@@ -3,37 +3,42 @@ package com.example.ProjectJava.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="user_responses",schema="public")
+@Table(name = "user_responses", schema = "public")
 public class UserResponse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long responseId;
 
     @ManyToOne
-    @JoinColumn(name = "user_quiz_id")
-    private UserQuiz userQuiz;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "question_id")
     private Question question;
 
-    private String response;
-    private boolean isCorrect;
+    @ManyToOne
+    @JoinColumn(name = "answer_id")
+    private Answer answer;
 
-    public Long getId() {
-        return id;
+    @ManyToOne
+    @JoinColumn(name = "quiz_id")
+    private Quiz quiz;
+
+    public Long getResponseId() {
+        return responseId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setResponseId(Long responseId) {
+        this.responseId = responseId;
     }
 
-    public UserQuiz getUserQuiz() {
-        return userQuiz;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserQuiz(UserQuiz userQuiz) {
-        this.userQuiz = userQuiz;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Question getQuestion() {
@@ -44,19 +49,21 @@ public class UserResponse {
         this.question = question;
     }
 
-    public String getResponse() {
-        return response;
+    public Answer getAnswer() {
+        return answer;
     }
 
-    public void setResponse(String response) {
-        this.response = response;
+    public void setAnswer(Answer answer) {
+        this.answer = answer;
     }
 
-    public boolean isCorrect() {
-        return isCorrect;
+    public Quiz getQuiz() {
+        return quiz;
     }
 
-    public void setCorrect(boolean correct) {
-        isCorrect = correct;
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
     }
+
+    // Getters and setters
 }

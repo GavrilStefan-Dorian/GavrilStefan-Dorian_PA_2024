@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface QuestionRepository extends JpaRepository<Question, Long> {
-    List<Question> findByDomainId(Long domainId);
+    List<Question> findByDomainDomainId(Long domainId);
 
-    Optional<Question> findByIdAndDomainId(Long questionId, Long domainId);
+    Optional<Question> findByQuestionIdAndDomainDomainId(Long questionId, Long domainId);
+
+//    List<Question> findByQuizQuizId(Long quizId);
 }

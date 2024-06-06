@@ -1,18 +1,22 @@
+// QuizService.java
 package com.example.ProjectJava.services;
 
-import com.example.ProjectJava.entities.*;
-import com.example.ProjectJava.repositories.*;
+import com.example.ProjectJava.entities.Domain;
+import com.example.ProjectJava.entities.Question;
+import com.example.ProjectJava.entities.Quiz;
+import com.example.ProjectJava.entities.QuizQuestion;
+import com.example.ProjectJava.repositories.DomainRepository;
+import com.example.ProjectJava.repositories.QuestionRepository;
+import com.example.ProjectJava.repositories.QuizRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.Random;
 
 @Service
 public class QuizService {
-
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private DomainRepository domainRepository;
@@ -23,73 +27,38 @@ public class QuizService {
     @Autowired
     private QuizRepository quizRepository;
 
-    @Autowired
-    private UserQuizRepository userQuizRepository;
-
-    @Autowired
-    private UserResponseRepository userResponseRepository;
-
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    public Optional<User> getUserById(Long userId) {
-        return userRepository.findById(userId);
-    }
-
-    public List<Domain> getAllDomains() {
-        return domainRepository.findAll();
-    }
-
-    public Optional<Domain> getDomainById(Long domainId) {
-        return domainRepository.findById(domainId);
-    }
-
-    public List<Question> getQuestionsByDomain(Long domainId) {
-        return questionRepository.findByDomainId(domainId);
-    }
-
-    public Optional<Question> getQuestionById(Long domainId, Long questionId) {
-        return questionRepository.findByIdAndDomainId(questionId, domainId);
-    }
-
-    public Quiz createQuiz(Long domainId, List<Long> questionIds) {
+    public Quiz createQuiz(Long domainId, int numberOfQuestions) {
         Domain domain = domainRepository.findById(domainId).orElseThrow();
-        List<Question> questions = questionRepository.findAllById(questionIds);
+        List<Question> allQuestions = questionRepository.findByDomainDomainId(domainId);
+
+        // If there are not enough questions, return null or handle accordingly
+        if (allQuestions.size() < numberOfQuestions) {
+            return null;
+        }
+
+        List<QuizQuestion> quizQuestions = selectRandomQuestions(allQuestions, numberOfQuestions);
+
         Quiz quiz = new Quiz();
         quiz.setDomain(domain);
-        quiz.setQuestions(questions);
+        quiz.setQuizQuestions(quizQuestions);
+
         return quizRepository.save(quiz);
     }
 
-    public void startQuiz(Long quizId, Long userId) {
-        User user = userRepository.findById(userId).orElseThrow();
-        Quiz quiz = quizRepository.findById(quizId).orElseThrow();
-        UserQuiz userQuiz = new UserQuiz();
-        userQuiz.setUser(user);
-        userQuiz.setQuiz(quiz);
-        userQuizRepository.save(userQuiz);
-    }
+    private List<QuizQuestion> selectRandomQuestions(List<Question> allQuestions, int numberOfQuestions) {
+        List<QuizQuestion> selectedQuizQuestions = new ArrayList<>();
+        Random random = new Random();
 
-    public void submitResponses(Long userQuizId, List<UserResponse> responses) {
-        UserQuiz userQuiz = userQuizRepository.findById(userQuizId).orElseThrow();
-        int score = 0;
-        for (UserResponse response : responses) {
-            response.setUserQuiz(userQuiz);
-            if (response.isCorrect()) {
-                score++;
-            }
-            userResponseRepository.save(response);
+        while (selectedQuizQuestions.size() < numberOfQuestions) {
+            Question randomQuestion = allQuestions.get(random.nextInt(allQuestions.size()));
+
+            QuizQuestion quizQuestion = new QuizQuestion();
+            quizQuestion.setQuestion(randomQuestion);
+
+            selectedQuizQuestions.add(quizQuestion);
         }
-        userQuiz.setScore(score);
-        userQuizRepository.save(userQuiz);
+
+        return selectedQuizQuestions;
     }
 
-    public List<UserQuiz> getUserQuizzes(Long userId) {
-        return userQuizRepository.findByUserId(userId);
-    }
-
-    public List<UserResponse> getQuizResponses(Long userQuizId) {
-        return userResponseRepository.findByUserQuizId(userQuizId);
-    }
 }

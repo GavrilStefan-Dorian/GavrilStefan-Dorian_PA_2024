@@ -1,29 +1,38 @@
 package com.example.ProjectJava.entities;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name="questions",schema="public")
+@Table(name="questions")
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long questionId;
+
     private String text;
 
     @ManyToOne
     @JoinColumn(name = "domain_id")
     private Domain domain;
 
-    @ManyToOne
-    @JoinColumn(name = "quiz_id")
-    private Quiz quiz;
+    @OneToMany(mappedBy = "question")
+    private List<QuizQuestion> quizQuestions;
 
-    public Long getId() {
-        return id;
+    public List<QuizQuestion> getQuizQuestions() {
+        return quizQuestions;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setQuizQuestions(List<QuizQuestion> quizQuestions) {
+        this.quizQuestions = quizQuestions;
+    }
+
+    public Long getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(Long questionId) {
+        this.questionId = questionId;
     }
 
     public String getText() {
@@ -42,11 +51,5 @@ public class Question {
         this.domain = domain;
     }
 
-    public Quiz getQuiz() {
-        return quiz;
-    }
 
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
-    }
 }

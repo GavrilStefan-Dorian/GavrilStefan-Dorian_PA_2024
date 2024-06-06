@@ -1,9 +1,3 @@
-create table questions
-(
-	question_id SERIAL primary key,
-	domain_id INTEGER NOT NULL,
-	text VARCHAR(255) NOT NULL
-);
 
 create table answers
 (
@@ -19,6 +13,13 @@ create table domains
 	name VARCHAR(255) NOT NULL
 );
 
+create table questions
+(
+	question_id SERIAL primary key,
+	domain_id INTEGER NOT NULL,
+	text VARCHAR(255) NOT NULL,
+	FOREIGN KEY (domain_id) REFERENCES domains(domain_id)
+);
 create table users
 (
 	user_id SERIAL PRIMARY KEY,
@@ -42,6 +43,16 @@ create table user_responses
 	answer_id INTEGER REFERENCES answers, 
 	quiz_id INTEGER REFERENCES quizzes
 );
+
+CREATE TABLE user_quizzes (
+    user_quiz_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    quiz_id INTEGER NOT NULL,
+    score INTEGER,
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (quiz_id) REFERENCES quizzes(quiz_id)
+);
+
 
 create table quiz_questions
 (
@@ -300,11 +311,11 @@ INSERT INTO questions (domain_id, text) VALUES
 ((SELECT domain_id FROM domains WHERE name='INVENTATORI SI INVENTII'), 'Cine a inventat primul aparat de fotografiat?'),
 ((SELECT domain_id FROM domains WHERE name='INVENTATORI SI INVENTII'), 'Ce inventator este cunoscut pentru invenția motorului cu abur?');
 
-SELECT * FROM QUESTIONS;
-select * from domains;
-delete from questions where domain_id=10;
-SELECT pg_get_serial_sequence('questions', 'question_id');
-ALTER SEQUENCE public.questions_question_id_seq RESTART WITH 196;
+--SELECT * FROM QUESTIONS;
+--select * from domains;
+--delete from questions where domain_id=10;
+--SELECT pg_get_serial_sequence('questions', 'question_id');
+--ALTER SEQUENCE public.questions_question_id_seq RESTART WITH 196;
 
 INSERT INTO answers (text, is_correct, question_id) VALUES
 ('Amazon', true, 1),('Nil', false, 1),('Yangtze', false, 1),('Mississippi', false, 1),
@@ -559,9 +570,9 @@ INSERT INTO answers (text, is_correct, question_id) VALUES
 ('Thomas Edison', false, 209), ('Alexander Graham Bell', false, 209), ('George Eastman', true, 209), ('Nikola Tesla', false, 209),
 ('Nikolaus Otto', false, 210), ('Karl Benz', false, 210), ('James Watt', true, 210), ('Henry Ford', false, 210);
 
-SELECT pg_get_serial_sequence('answers', 'answer_id');
-ALTER SEQUENCE public.answers_answer_id_seq RESTART WITH 1;
-delete from answers where true;
-select * from answers;
-
+--SELECT pg_get_serial_sequence('answers', 'answer_id');
+--ALTER SEQUENCE public.answers_answer_id_seq RESTART WITH 1;
+--delete from answers where true;
+--select * from answers;
+--
 

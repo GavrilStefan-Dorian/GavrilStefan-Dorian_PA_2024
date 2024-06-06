@@ -1,8 +1,9 @@
+// DomainController.java
 package com.example.ProjectJava.controllers;
 
 import com.example.ProjectJava.entities.Domain;
 import com.example.ProjectJava.entities.Question;
-import com.example.ProjectJava.services.QuizService;
+import com.example.ProjectJava.services.DomainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,23 +16,23 @@ import java.util.Optional;
 public class DomainController {
 
     @Autowired
-    private QuizService quizService;
+    private DomainService domainService;
 
     @GetMapping
     public ResponseEntity<List<Domain>> getAllDomains() {
-        List<Domain> domains = quizService.getAllDomains();
+        List<Domain> domains = domainService.getAllDomains();
         return ResponseEntity.ok(domains);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Domain> getDomainById(@PathVariable("id") Long domainId) {
-        Optional<Domain> domain = quizService.getDomainById(domainId);
-        return domain.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    @GetMapping("/{domainId}")
+    public ResponseEntity<Domain> getDomainById(@PathVariable("domainId") Long domainId) {
+        Domain domain = domainService.getDomainById(domainId).get();
+        return ResponseEntity.ok(domain);
     }
 
-    @GetMapping("/{id}/questions")
-    public ResponseEntity<List<Question>> getQuestionsByDomain(@PathVariable("id") Long domainId) {
-        List<Question> questions = quizService.getQuestionsByDomain(domainId);
+    @GetMapping("/{domainId}/questions")
+    public ResponseEntity<List<Question>> getQuestionsByDomain(@PathVariable("domainId") Long domainId) {
+        List<Question> questions = domainService.getQuestionsByDomain(domainId);
         return ResponseEntity.ok(questions);
     }
 }

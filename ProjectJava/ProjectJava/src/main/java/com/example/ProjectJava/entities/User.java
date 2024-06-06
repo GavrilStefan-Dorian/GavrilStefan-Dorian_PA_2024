@@ -2,25 +2,24 @@ package com.example.ProjectJava.entities;
 
 import jakarta.persistence.*;
 import java.util.List;
-
 @Entity
-@Table(name="users",schema="public")
+@Table(name="users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long userId;
     private String username;
+    private String email;
     private String password;
 
-    @OneToMany(mappedBy = "user")
-    private List<UserQuiz> quizzes;
+    // Getters and setters
 
-    public Long getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -31,6 +30,14 @@ public class User {
         this.username = username;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -38,14 +45,4 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public List<UserQuiz> getQuizzes() {
-        return quizzes;
-    }
-
-    public void setQuizzes(List<UserQuiz> quizzes) {
-        this.quizzes = quizzes;
-    }
-
-    // Constructors, getters, setters
 }
