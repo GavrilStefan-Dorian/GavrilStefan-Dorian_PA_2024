@@ -2,44 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
-<h1>Login</h1>
-<form id="loginForm">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username"><br><br>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password"><br><br>
-    <input type="submit" value="Login">
-</form>
-<div id="loginMessage"></div>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <form>
+        <h3>Login Here</h3>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#loginForm').submit(function(event) {
-            event.preventDefault();
-            var username = $('#username').val();
-            var password = $('#password').val();
+        <label for="username">Username</label>
+        <input type="text" placeholder="Username or email" id="username">
 
-            $.ajax({
-                type: 'POST',
-                url: "https://localhost:443/account/login",
-                data: JSON.stringify({ userName: username, password: password }),
-                contentType: 'application/json',
-                success: function(response) {
-                    localStorage.setItem("jwtToken", response.token);
-
-                    window.location.href = "https://localhost:443/page";
-                },
-                error: function(xhr, status, error) {
-                    $('#loginMessage').text('Login failed');
-                }
-            });
-        });
-    });
-</script>
+        <label for="password">Password</label>
+        <input type="password" placeholder="Password" id="password">
+        
+        <div class="new-account">You haven't an account? <a href="register.html">Create a new account</a></div>
+        <button class="button-login">Log In</button>
+    </form>
 </body>
 </html>
