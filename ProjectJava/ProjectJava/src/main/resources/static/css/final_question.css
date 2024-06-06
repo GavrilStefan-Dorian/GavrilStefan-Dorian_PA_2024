@@ -88,7 +88,7 @@ input[type="radio"] {
 }
 
 .button-link {
-    width: 40%;
+    width: 25%;
     background-color: #1a73e8;
     color: white;
     padding: 10px;
@@ -114,6 +114,18 @@ input[type="radio"] {
 
 .button-link-secondary:hover {
     background-color: orange;
+    color: #141414;
+    font-weight: 600;
+}
+
+.button-link-third {
+    background-color: lightgreen;
+    color: #141414;
+    font-weight: 400;
+}
+
+.button-link-third:hover {
+    background-color: green;
     color: #141414;
     font-weight: 600;
 }

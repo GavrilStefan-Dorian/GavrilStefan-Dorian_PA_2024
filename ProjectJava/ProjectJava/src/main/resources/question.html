@@ -41,3 +41,29 @@
     </div>
 </body>
 </html>
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Page</title>
+    <link rel="stylesheet" th:href="@{/css/question.css}">
+    <script th:src="@{/js/getQuestion.js}"></script>
+</head>
+<body>
+<div class="background-elements">
+    <div class="question-mark">?</div>
+    <div class="question-mark">?</div>
+</div>
+<div class="container">
+    <form id="questionForm">
+        <h2>Answer the Question</h2>
+        <div id="questionContainer"></div>
+        <div class="answers" id="answersContainer"></div>
+        <button type="submit">Send</button>
+    </form>
+</div>
+</body>
+</html>

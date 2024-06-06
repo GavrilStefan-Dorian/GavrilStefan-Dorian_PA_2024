@@ -21,19 +21,46 @@ public class PageController {
   return modelAndView;
  }
 
- @GetMapping("/account/login")
- public String loginPage() {
-  return "login";
- }
-
- @GetMapping("/account/register")
- public String registerPage() {
-  return "register";
- }
+// @GetMapping("/account/login")
+// public String loginPage() {
+//  return "login";
+// }
+//
+// @GetMapping("/account/register")
+// public String registerPage() {
+//  return "register";
+// }
 
 
  @GetMapping("/question")
  public String questionPage() {
   return "question";
  }
+
+ @GetMapping("/final_question")
+ public String finalQuestionPage() {
+  return "final_question";
+ }
+
+ @GetMapping("/domains")
+ public String domainsPage() {
+  return "domains";
+ }
+
+ @GetMapping("/scoreboard")
+ public String scoreboardPage() {
+  return "clasament_sport";
+ }
+
+ @GetMapping("/login")
+ public String loginPage() {
+  return "login";
+ }
+
+ @GetMapping("/register")
+ public String registerPage() {
+  return "register";
+ }
+
+
 }
