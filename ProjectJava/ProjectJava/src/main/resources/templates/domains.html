@@ -5,36 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Select Domain</title>
     <link rel="stylesheet" th:href="@{/css/domains.css}">
+    <script th:src="@{/js/domains.js}"></script>
 </head>
 <body>
-    <div class="background-elements">
-        <div class="quiz-icon">🎲</div>
-        <div class="quiz-icon">📚</div>
-        <div class="quiz-icon">🎯</div>
-        <div class="quiz-icon">🏆</div>
-    </div>
-    <div class="container">
-        <form action="question_page.html" method="get">
-            <h2>Select a Domain</h2>
-            <div class="domain-selection">
-                <label for="domain">Choose a domain:</label>
-                <select name="domain" id="domain" placeholder="Selecteaza domeniul pentru quizul tau!" required>
-                    <option value="">Selecteaza domeniul</option>
-                    <option value="science">Stiinta</option>
-                    <option value="history">Istorie</option>
-                    <option value="geography">Geografie</option>
-                    <option value="sports">Sport</option>
-                    <option value="gastronomy">Gastronomie</option>
-                    <option value="literature">Literatura</option>
-                    <option value="math">Matematica</option>
-                    <option value="art">Arta</option>
-                    <option value="music">Muzica</option>
-                    <option value="inventions">Inventatori si inventii</option>
-                    <option value="general culture">Cultura generala</option>
-                </select>
-            </div>
-            <button type="submit" class="button-link">Start the quiz</button>
-        </form>
-    </div>
+<div class="background-elements">
+    <div class="quiz-icon">🎲</div>
+    <div class="quiz-icon">📚</div>
+    <div class="quiz-icon">🎯</div>
+    <div class="quiz-icon">🏆</div>
+</div>
+<div class="container">
+    <form id="domainForm">
+        <h2>Select a Domain</h2>
+        <div class="domain-selection">
+            <label for="domain">Choose a domain:</label>
+            <select name="domain" id="domain" placeholder="Selecteaza domeniul pentru quizul tau!" required>
+                <option value="">Selecteaza domeniul</option>
+            </select>
+        </div>
+        <button type="button" class="button-link" onclick="startQuiz()">Start the quiz</button>
+    </form>
+</div>
 </body>
 </html>
