@@ -1,6 +1,6 @@
-//package com.example.ProjectJava.config;
+//package com.example.OLD.config;
 //
-//import com.example.ProjectJava.services.AppUserService;
+//import com.example.OLD.services.AppUserService;
 //import org.springframework.beans.factory.annotation.Value;
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;

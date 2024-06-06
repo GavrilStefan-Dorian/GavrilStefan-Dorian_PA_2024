@@ -1,16 +1,12 @@
 package com.example.ProjectJava.controllers;
 
-import com.example.ProjectJava.entities.Quiz;
-import com.example.ProjectJava.entities.UserQuizScore;
+import com.example.ProjectJava.entities.User;
+import com.example.ProjectJava.entities.UserQuiz;
 import com.example.ProjectJava.entities.UserResponse;
-import com.example.ProjectJava.services.UserService;
-import org.apache.catalina.User;
+import com.example.ProjectJava.services.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,54 +16,29 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private QuizService quizService;
 
-    // Get all users
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
-        List<User> users = userService.getAllUsers();
+        List<User> users = quizService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
-    // Get user by ID
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") Long userId) {
-        Optional<User> user = userService.getUserById(userId);
+        Optional<User> user = quizService.getUserById(userId);
         return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Get quizzes for a user
     @GetMapping("/{id}/quizzes")
-    public ResponseEntity<List<Quiz>> getQuizzesForUser(@PathVariable("id") Long userId) {
-        List<Quiz> quizzes = userService.getQuizzesForUser(userId);
+    public ResponseEntity<List<UserQuiz>> getUserQuizzes(@PathVariable("id") Long userId) {
+        List<UserQuiz> quizzes = quizService.getUserQuizzes(userId);
         return ResponseEntity.ok(quizzes);
     }
 
-    // Get a specific quiz for a user
-    @GetMapping("/{id}/quizzes/{quizId}")
-    public ResponseEntity<Quiz> getQuizForUser(@PathVariable("id") Long userId, @PathVariable("quizId") Long quizId) {
-        Optional<Quiz> quiz = userService.getQuizForUser(userId, quizId);
-        return quiz.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    // Get score for a specific quiz for a user
-    @GetMapping("/{id}/quizzes/{quizId}/score")
-    public ResponseEntity<UserQuizScore> getScoreForQuiz(@PathVariable("id") Long userId, @PathVariable("quizId") Long quizId) {
-        Optional<UserQuizScore> score = userService.getScoreForQuiz(userId, quizId);
-        return score.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    // Get responses for a specific quiz for a user
     @GetMapping("/{id}/quizzes/{quizId}/responses")
-    public ResponseEntity<List<UserResponse>> getResponsesForQuiz(@PathVariable("id") Long userId, @PathVariable("quizId") Long quizId) {
-        List<UserResponse> responses = userService.getResponsesForQuiz(userId, quizId);
+    public ResponseEntity<List<UserResponse>> getQuizResponses(@PathVariable("id") Long userQuizId) {
+        List<UserResponse> responses = quizService.getQuizResponses(userQuizId);
         return ResponseEntity.ok(responses);
-    }
-
-    // Get a specific response for a specific quiz for a user
-    @GetMapping("/{id}/quizzes/{quizId}/responses/{responseId}")
-    public ResponseEntity<UserResponse> getResponseForQuiz(@PathVariable("id") Long userId, @PathVariable("quizId") Long quizId, @PathVariable("responseId") Long responseId) {
-        Optional<UserResponse> response = userService.getResponseForQuiz(userId, quizId, responseId);
-        return response.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

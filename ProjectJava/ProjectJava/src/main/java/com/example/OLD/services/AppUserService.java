@@ -1,7 +1,7 @@
-//package com.example.ProjectJava.services;
+//package com.example.OLD.services;
 //
-//import com.example.ProjectJava.entities.AppUser;
-//import com.example.ProjectJava.repositories.AppUserRepositoryJPA;
+//import com.example.OLD.entities.AppUser;
+//import com.example.OLD.repositories.AppUserRepositoryJPA;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.core.userdetails.User;
 //import org.springframework.security.core.userdetails.UserDetails;
