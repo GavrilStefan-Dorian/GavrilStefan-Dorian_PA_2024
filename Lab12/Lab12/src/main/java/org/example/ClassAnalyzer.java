@@ -1,11 +1,19 @@
 package org.example;
 
+import org.objectweb.asm.*;
+import org.objectweb.asm.util.TraceClassVisitor;
+
+import javax.tools.JavaCompiler;
+import javax.tools.JavaFileObject;
+import javax.tools.StandardJavaFileManager;
+import javax.tools.ToolProvider;
 import java.io.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
@@ -22,6 +30,7 @@ public class ClassAnalyzer {
         if (file.isDirectory()) {
             analyzeDirectory(file);
         } else if (path.endsWith(".class")) {
+            instrumentClass(path);
             analyzeClassFromFile(file);
         } else if (path.endsWith(".jar")) {
             analyzeJar(file);
@@ -40,6 +49,7 @@ public class ClassAnalyzer {
                 if (file.isDirectory()) {
                     queue.add(file);
                 } else if (file.getName().endsWith(".class")) {
+                    instrumentClass(file.getPath());
                     analyzeClassFromFile(file);
                 }
             }
@@ -51,17 +61,36 @@ public class ClassAnalyzer {
             JarEntry entry;
             while ((entry = jarStream.getNextJarEntry()) != null) {
                 if (entry.getName().endsWith(".class")) {
+                    // Extract class file and instrument it before analysis
+                    File tempFile = File.createTempFile("temp", ".class");
+                    try (FileOutputStream fos = new FileOutputStream(tempFile)) {
+                        byte[] buffer = new byte[1024];
+                        int bytesRead;
+                        while ((bytesRead = jarStream.read(buffer)) != -1) {
+                            fos.write(buffer, 0, bytesRead);
+                        }
+                    }
+                    instrumentClass(tempFile.getPath());
                     analyzeClassFromStream(jarFile, entry.getName());
+                    tempFile.deleteOnExit();
                 }
             }
         }
     }
 
-    private static void analyzeClassFromFile(File file) throws ClassNotFoundException, MalformedURLException {
+    public static void analyzeClassFromFile(File file) throws ClassNotFoundException, MalformedURLException {
         String className = getClassNameFromFile(file);
         URLClassLoader classLoader = URLClassLoader.newInstance(new URL[]{file.getParentFile().toURI().toURL()});
         Class<?> cls = Class.forName(className, true, classLoader);
         analyzeClass(cls);
+
+        try {
+            byte[] classBytes = Files.readAllBytes(file.toPath());
+            ClassReader cr = new ClassReader(classBytes);
+            cr.accept(new TraceClassVisitor(new PrintWriter(System.out)), 0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static String getClassNameFromFile(File file) {
@@ -127,18 +156,18 @@ public class ClassAnalyzer {
                 totalTests++;
                 try {
                     if (Modifier.isPublic(method.getModifiers())) {
-                            System.out.println("Invocand metoda @Test cu " + method.getParameterCount() + " parametrii: " + method.getName());
-                        if(method.getParameterCount() == 0)
+                        System.out.println("Invocand metoda @Test cu " + method.getParameterCount() + " parametrii: " + method.getName());
+                        if (method.getParameterCount() == 0) {
                             method.invoke(cls.getDeclaredConstructor().newInstance());
-                        else {
+                        } else {
                             Object[] args = new Object[method.getParameterCount()];
                             int count = 0;
-                            for(Class<?> type : method.getParameterTypes()){
-//                                System.out.println(type.getSimpleName());
-                                if(type.getSimpleName().equals("int"))
+                            for (Class<?> type : method.getParameterTypes()) {
+                                if (type.getSimpleName().equals("int")) {
                                     args[count++] = random.nextInt(50);
-                                if(type.getSimpleName().equals("String"))
+                                } else if (type.getSimpleName().equals("String")) {
                                     args[count++] = "a string";
+                                }
                             }
                             method.invoke(cls.getDeclaredConstructor().newInstance(), args);
                         }
@@ -153,10 +182,94 @@ public class ClassAnalyzer {
         System.out.println("Total metode @Test: " + totalTests + ", Invocate cu succes: " + invokedTests);
     }
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void instrumentClass(String classFilePath) throws IOException {
+        FileInputStream fis = new FileInputStream(classFilePath);
+        ClassReader cr = new ClassReader(fis);
+        ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 
-            BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
-            String path = console.readLine();
-            analyzePath(path);
+        ClassVisitor cv = new ClassVisitor(Opcodes.ASM9, cw) {
+            @Override
+            public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
+                MethodVisitor mv = super.visitMethod(access, name, descriptor, signature, exceptions);
+                return new MethodVisitor(Opcodes.ASM9, mv) {
+                    @Override
+                    public void visitCode() {
+                        super.visitCode();
+                        // Insert bytecode instructions here
+                        mv.visitFieldInsn(Opcodes.GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
+                        mv.visitLdcInsn("Executing method: " + name);
+                        mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
+                    }
+                };
+            }
+        };
+
+        cr.accept(cv, ClassReader.EXPAND_FRAMES);
+        fis.close();
+
+        byte[] bytecode = cw.toByteArray();
+        FileOutputStream fos = new FileOutputStream(classFilePath);
+        fos.write(bytecode);
+        fos.close();
+    }
+
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+        String path = console.readLine();
+
+        if (path.endsWith(".java")) {
+            compileJavaFile(path);
+            path = path.replace(".java", ".class");
+            instrumentClass(path);
+        }
+
+        analyzePath(path);
+//        generateDynamicTestClass();
+    }
+
+    public static void compileJavaFile(String filePath) throws IOException {
+        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+        StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
+
+        Iterable<? extends JavaFileObject> compilationUnits = fileManager.getJavaFileObjectsFromStrings(Collections.singletonList(filePath));
+
+        JavaCompiler.CompilationTask task = compiler.getTask(null, fileManager, null, null, null, compilationUnits);
+
+        boolean success = task.call();
+
+        fileManager.close();
+
+        if (success) {
+            System.out.println("Compilare cu succes: " + filePath);
+        } else {
+            System.out.println("Compilare eșuată: " + filePath);
+        }
+    }
+
+    public static void generateDynamicTestClass() throws IOException {
+        ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
+
+        cw.visit(Opcodes.V11, Opcodes.ACC_PUBLIC, "DynamicTestClass", null, "java/lang/Object", null);
+
+        MethodVisitor constructor = cw.visitMethod(Opcodes.ACC_PUBLIC, "<init>", "()V", null, null);
+        constructor.visitVarInsn(Opcodes.ALOAD, 0);
+        constructor.visitMethodInsn(Opcodes.INVOKESPECIAL, "java/lang/Object", "<init>", "()V", false);
+        constructor.visitInsn(Opcodes.RETURN);
+        constructor.visitMaxs(1, 1);
+        constructor.visitEnd();
+
+        MethodVisitor testMethod = cw.visitMethod(Opcodes.ACC_PUBLIC, "testMethod", "()V", null, null);
+        testMethod.visitFieldInsn(Opcodes.GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
+        testMethod.visitLdcInsn("Dynamic Test Method");
+        testMethod.visitMethodInsn(Opcodes.INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false);
+        testMethod.visitInsn(Opcodes.RETURN);
+        testMethod.visitMaxs(2, 1);
+        testMethod.visitEnd();
+
+        cw.visitEnd();
+
+        FileOutputStream fos = new FileOutputStream("DynamicTestClass.class");
+        fos.write(cw.toByteArray());
+        fos.close();
     }
 }

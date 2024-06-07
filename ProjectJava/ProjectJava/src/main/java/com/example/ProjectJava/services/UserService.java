@@ -1,4 +1,3 @@
-// UserService.java
 package com.example.ProjectJava.services;
 
 import com.example.ProjectJava.entities.Quiz;
@@ -59,12 +58,10 @@ public class UserService {
     }
 
     public void postUserQuizResponses(Long userId, Long quizId, List<UserResponse> responses) {
-        // Retrieve user and quiz from database
         User user = userRepository.findById(userId).orElse(null);
         Quiz quiz = quizRepository.findById(quizId).orElse(null);
 
         if (user != null && quiz != null) {
-            // Save user responses
             for (UserResponse response : responses) {
                 response.setUser(user);
                 response.setQuiz(quiz);

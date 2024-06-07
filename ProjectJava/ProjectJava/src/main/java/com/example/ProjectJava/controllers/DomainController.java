@@ -1,4 +1,3 @@
-// DomainController.java
 package com.example.ProjectJava.controllers;
 
 import com.example.ProjectJava.entities.Domain;

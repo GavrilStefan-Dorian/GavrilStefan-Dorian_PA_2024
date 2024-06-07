@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class QuizQuestion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long quiz_question_id;
 
     @ManyToOne
     @JoinColumn(name = "quiz_id")
@@ -17,12 +17,12 @@ public class QuizQuestion {
     @JoinColumn(name = "question_id")
     private Question question;
 
-    public Long getId() {
-        return id;
+    public Long getQuiz_question_id() {
+        return quiz_question_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setQuiz_question_id(Long quiz_question_id) {
+        this.quiz_question_id = quiz_question_id;
     }
 
     public Quiz getQuiz() {
@@ -41,5 +41,5 @@ public class QuizQuestion {
         this.question = question;
     }
 
-    // Getters, setters, constructors
-}
+
+    }

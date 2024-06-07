@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 fetch(`https://localhost:443/questions/${pageId}/answers`)
                     .then(response => response.json())
                     .then(options => {
-                        if (options && Array.isArray(options)) { // Change here
+                        if (options && Array.isArray(options)) {
                             options.forEach(option => {
                                 const label = document.createElement('label');
                                 label.innerHTML = `
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function handleSubmit(event) {
-        event.preventDefault(); // Prevent default form submission
+        event.preventDefault();
         const currentPageIndex = getCurrentPageIndex();
         const nextPageIndex = parseInt(currentPageIndex) + 1;
         setCurrentPageIndex(nextPageIndex);
@@ -49,7 +49,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.getElementById('questionForm').addEventListener('submit', handleSubmit);
 
-    // Call the function when the page loads
     window.onload = function() {
         const currentPageIndex = getCurrentPageIndex();
         fetchQuestionAndUpdatePage(currentPageIndex);

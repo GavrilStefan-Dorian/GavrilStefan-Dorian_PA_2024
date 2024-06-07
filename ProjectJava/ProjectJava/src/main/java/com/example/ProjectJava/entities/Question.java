@@ -1,5 +1,6 @@
 package com.example.ProjectJava.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -16,7 +17,8 @@ public class Question {
     @JoinColumn(name = "domain_id")
     private Domain domain;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<QuizQuestion> quizQuestions;
 
     public List<QuizQuestion> getQuizQuestions() {

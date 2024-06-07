@@ -65,5 +65,4 @@ public class UserResponse {
         this.quiz = quiz;
     }
 
-    // Getters and setters
 }

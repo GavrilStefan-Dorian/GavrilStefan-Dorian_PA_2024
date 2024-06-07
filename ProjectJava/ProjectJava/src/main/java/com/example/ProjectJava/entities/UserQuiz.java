@@ -52,5 +52,4 @@ public class UserQuiz {
         this.score = score;
     }
 
-    // Getters and setters
 }

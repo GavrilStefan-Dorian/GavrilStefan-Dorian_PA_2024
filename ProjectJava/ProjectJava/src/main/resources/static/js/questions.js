@@ -1,72 +1,130 @@
 document.addEventListener("DOMContentLoaded", function() {
-    let questions = []; // Store the list of questions
-    let currentIndex = 0; // Current question index
+    let currentIndex = 0;
+    let quizId = 0;
+    let selectedAnswers = {};
+    let questions = [];
 
     function fetchQuestionsAndStartQuiz() {
-        // Replace the URL with your backend endpoint to fetch questions
-        fetch('https://localhost:443/questions')
-            .then(response => response.json())
-            .then(data => {
-            questions = data; // Store the received questions
-            displayQuestion(currentIndex); // Start displaying questions
+        const urlParams = new URLSearchParams(window.location.search);
+        quizId = urlParams.get('quizId');
+        fetchQuestions(function() {
+            displayQuestion(currentIndex);
+        });
+    }
+
+    function fetchQuestions(callback) {
+        fetch(`/quizzes/${quizId}/questions`)
+            .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch questions');
+            }
+            return response.json();
         })
-            .catch(error => console.error('Error fetching questions:', error));
+            .then(data => {
+            questions = data;
+            let count = 0;
+            questions.forEach(question => {
+                fetch(`/questions/${question.questionId}/answers`)
+                    .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch answers for question: ' + question.questionId);
+                    }
+                    return response.json();
+                })
+                    .then(answers => {
+                    question.answers = answers;
+                    count++;
+                    if (count === questions.length) {
+                        callback();
+                    }
+                })
+                    .catch(error => console.error('Error fetching answers:', error));
+            });
+        })
+            .catch(error => {
+            console.error('Error fetching questions:', error);
+        });
     }
 
     function displayQuestion(index) {
         const questionContainer = document.getElementById('questionContainer');
-        questionContainer.innerHTML = `<p>${questions[index].text}</p>`;
-
         const answersContainer = document.getElementById('answersContainer');
+
+        if (index < 0 || index >= questions.length) {
+            console.error('Invalid question index');
+            return;
+        }
+
+        const currentQuestion = questions[index];
+
+        if (!currentQuestion) {
+            console.error('Current question is undefined');
+            return;
+        }
+
+        questionContainer.textContent = currentQuestion.text;
+
         answersContainer.innerHTML = '';
 
-        questions[index].answers.forEach(answer => {
+        currentQuestion.answers.forEach(answer => {
             const label = document.createElement('label');
-            label.innerHTML = `
-                <input type="radio" name="answer" value="${answer.value}" required>
-                ${answer.text}
-            `;
+            const input = document.createElement('input');
+            input.type = 'radio';
+            input.name = 'answer';
+            input.value = answer.text;
+
+            if (selectedAnswers[currentQuestion.questionId] === answer.text) {
+                input.checked = true;
+            }
+
+            input.required = true;
+            label.appendChild(input);
+            label.appendChild(document.createTextNode(answer.text));
             answersContainer.appendChild(label);
         });
 
-        // Update navigation buttons based on the current question index
-        updateNavigationButtons();
-    }
-
-    function updateNavigationButtons() {
-        const prevButton = document.getElementById('prevButton');
+        const previousButton = document.getElementById('previousButton');
         const nextButton = document.getElementById('nextButton');
+        const finishButton = document.getElementById('finishButton');
 
-        prevButton.disabled = currentIndex === 0; // Disable previous button on first question
-        nextButton.disabled = currentIndex === questions.length - 1; // Disable next button on last question
+        previousButton.disabled = index === 0;
+        nextButton.disabled = index === questions.length - 1;
+
+        if (index === questions.length - 1) {
+            nextButton.textContent = 'Finish';
+            finishButton.style.display = 'block';
+        } else {
+            nextButton.textContent = 'Next';
+            finishButton.style.display = 'none';
+        }
     }
 
     function handlePrevious() {
-        if (currentIndex > 0) {
-            currentIndex--;
-            displayQuestion(currentIndex);
-        }
+        currentIndex--;
+        displayQuestion(currentIndex);
     }
 
     function handleNext() {
-        if (currentIndex < questions.length - 1) {
-            currentIndex++;
-            displayQuestion(currentIndex);
+        // Save selected answer to session storage
+        const selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
+        selectedAnswers[questions[currentIndex].questionId] = selectedAnswer;
+        sessionStorage.selectedAnswers = JSON.stringify(selectedAnswers);
+
+        currentIndex++;
+
+        if (currentIndex === questions.length) {
+            window.location.href = '/pages/scoreboard';
         } else {
-            // Redirect to the final question page or perform any other action
-            window.location.href = 'final-question.html';
+            displayQuestion(currentIndex);
         }
     }
 
-    function handleSubmit(event) {
-        event.preventDefault(); // Prevent default form submission
-        // Handle form submission
-    }
 
-    document.getElementById('questionForm').addEventListener('submit', handleSubmit);
-    document.getElementById('prevButton').addEventListener('click', handlePrevious);
-    document.getElementById('nextButton').addEventListener('click', handleNext);
+    const previousButton = document.getElementById('previousButton');
+    const nextButton = document.getElementById('nextButton');
 
-    // Call the function to fetch questions and start the quiz
+    previousButton.addEventListener('click', handlePrevious);
+    nextButton.addEventListener('click', handleNext);
+
     fetchQuestionsAndStartQuiz();
 });

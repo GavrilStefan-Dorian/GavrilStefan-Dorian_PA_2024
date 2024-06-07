@@ -1,4 +1,3 @@
-// QuizService.java
 package com.example.ProjectJava.services;
 
 import com.example.ProjectJava.entities.Domain;
@@ -7,6 +6,7 @@ import com.example.ProjectJava.entities.Quiz;
 import com.example.ProjectJava.entities.QuizQuestion;
 import com.example.ProjectJava.repositories.DomainRepository;
 import com.example.ProjectJava.repositories.QuestionRepository;
+import com.example.ProjectJava.repositories.QuizQuestionRepository;
 import com.example.ProjectJava.repositories.QuizRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,25 +27,34 @@ public class QuizService {
     @Autowired
     private QuizRepository quizRepository;
 
+    @Autowired
+    private QuizQuestionRepository quizQuestionRepository;
+
     public Quiz createQuiz(Long domainId, int numberOfQuestions) {
         Domain domain = domainRepository.findById(domainId).orElseThrow();
         List<Question> allQuestions = questionRepository.findByDomainDomainId(domainId);
 
-        // If there are not enough questions, return null or handle accordingly
         if (allQuestions.size() < numberOfQuestions) {
             return null;
         }
 
-        List<QuizQuestion> quizQuestions = selectRandomQuestions(allQuestions, numberOfQuestions);
-
         Quiz quiz = new Quiz();
-        quiz.setDomain(domain);
-        quiz.setQuizQuestions(quizQuestions);
+        List<QuizQuestion> quizQuestions = selectRandomQuestions(quiz, allQuestions, numberOfQuestions);
 
-        return quizRepository.save(quiz);
+        quiz.setDomain(domain);
+        quiz.setNoQuestions(quizQuestions.size());
+
+        quiz = quizRepository.save(quiz);
+
+        for( QuizQuestion quizQuestion : quizQuestions)
+            quizQuestion.setQuiz((quiz));
+
+        quizQuestionRepository.saveAll(quizQuestions);
+
+        return quiz;
     }
 
-    private List<QuizQuestion> selectRandomQuestions(List<Question> allQuestions, int numberOfQuestions) {
+    private List<QuizQuestion> selectRandomQuestions(Quiz quiz, List<Question> allQuestions, int numberOfQuestions) {
         List<QuizQuestion> selectedQuizQuestions = new ArrayList<>();
         Random random = new Random();
 
@@ -54,11 +63,14 @@ public class QuizService {
 
             QuizQuestion quizQuestion = new QuizQuestion();
             quizQuestion.setQuestion(randomQuestion);
-
+//            quizQuestion.setQuiz(quiz);
             selectedQuizQuestions.add(quizQuestion);
         }
 
         return selectedQuizQuestions;
     }
 
+    public List<Question> getQuizQuestions(Long quizId) {
+        return questionRepository.findByQuizQuestionsQuizQuizId(quizId);
+    }
 }

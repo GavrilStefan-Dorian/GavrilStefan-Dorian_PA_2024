@@ -1,4 +1,3 @@
-// DomainService.java
 package com.example.ProjectJava.services;
 
 import com.example.ProjectJava.entities.Domain;

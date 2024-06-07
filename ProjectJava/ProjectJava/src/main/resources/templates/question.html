@@ -4,25 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Question Page</title>
-    <<link rel="stylesheet" th:href="@{/css/question.css}">
-    <script th:src="@{/js/question.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/question.css}">
+    <script th:src="@{/js/questions.js}" defer></script>
 </head>
 <body>
-    <div class="background-elements">
-        <div class="question-mark">?</div>
-        <div class="question-mark">?</div>
-    </div>
-    <div class="container">
-        <form id="questionForm">
-            <h2>Answer the Question</h2>
-            <div id="questionContainer"></div>
-            <div class="answers" id="answersContainer"></div>
+<div class="background-elements">
+    <div class="question-mark">?</div>
+    <div class="question-mark">?</div>
+</div>
+<div class="container">
+    <form id="questionForm">
+        <h2>Answer the Question</h2>
+        <div id="questionContainer"></div>
+        <div class="answers" id="answersContainer"></div>
 
-            <div class="button-container">
-                <a href="https://www.google.com" class="button-link">Previous</a>
-                <a href="https://www.google.com" class="button-link button-link-secondary">Next</a>
-            </div>
-        </form>
-    </div>
+        <div class="button-container">
+            <button type="button" class="button-link" id="previousButton">Previous</button>
+            <button type="button" class="button-link button-link-secondary" id="nextButton">Next</button>
+            <button type="button" class="button-link button-link-third" id="finishButton" style="display: none;">Finish</button>
+        </div>
+    </form>
+</div>
 </body>
 </html>

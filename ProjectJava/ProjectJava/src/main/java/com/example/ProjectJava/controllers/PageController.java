@@ -1,8 +1,10 @@
 package com.example.ProjectJava.controllers;
 
+import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -33,7 +35,9 @@ public class PageController {
 
 
  @GetMapping("/question")
- public String questionPage() {
+ public String questionPage(@RequestParam Long quizId, @RequestParam int questionIndex, Model model) {
+  model.addAttribute("quizId", quizId);
+  model.addAttribute("questionIndex", questionIndex);
   return "question";
  }
 
@@ -60,6 +64,11 @@ public class PageController {
  @GetMapping("/register")
  public String registerPage() {
   return "register";
+ }
+
+ @GetMapping("/start")
+ public String startPage() {
+  return "start";
  }
 
 

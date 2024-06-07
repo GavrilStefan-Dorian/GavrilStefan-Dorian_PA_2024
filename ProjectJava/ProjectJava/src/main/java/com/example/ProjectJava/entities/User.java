@@ -12,7 +12,6 @@ public class User {
     private String email;
     private String password;
 
-    // Getters and setters
 
     public Long getUserId() {
         return userId;

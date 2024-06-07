@@ -48,5 +48,4 @@ public class Answer {
         this.question = question;
     }
 
-    // Getters and setters
 }
